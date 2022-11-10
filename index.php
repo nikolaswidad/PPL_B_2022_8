@@ -40,7 +40,7 @@ if(isset($_POST['submit'])){
       elseif($row['user_type'] == 'Dosen'){
 
          $_SESSION['username'] = $row['email'];
-         header('location:dosen_page.php');
+         header('location:dosen_datamhs.php');
 
       }
 
