@@ -1,7 +1,7 @@
 <?php
 session_start(); //inisialisasi session
 require_once('config.php');
-$nim = $_SESSION['username']; 
+$nim = $_SESSION['nim'];
 
 if (isset($_POST['submit'])) {
     $submit = true;
@@ -10,28 +10,36 @@ if (isset($_POST['submit'])) {
       $error_id_status = "Semester tidak boleh kosong";
       $submit = false;
     } else {
-      $id_status = $db->real_escape_string(trim($_POST['id_status']));
+      $id_status = $conn->real_escape_string(trim($_POST['id_status']));
     }
   
     // Check if nilai is empty
     if (empty($_POST['nilai'])) {
-      $error_nilai = "nilai tidak boleh kosong";
-      $submit = false;
+        $submit = true;
     } else {
-      $nilai = $db->real_escape_string(trim($_POST['nilai']));
+        $nilai = $conn->real_escape_string(trim($_POST['nilai']));
+    }
+    // Check if lama is empty
+    if (empty($_POST['lama_studi'])) {
+    } else {
+        $lama_studi = $conn->real_escape_string(trim($_POST['lama_studi']));
     }
     
-    $lama_studi = $db->real_escape_string(trim($_POST['lama_studi']));
-    $tanggal_sidang = $db->real_escape_string(trim($_POST['tanggal_sidang']));
+    // Check if tanggal is empty
+    if ($_POST['tanggal_sidang']) {
+    } else {
+        $tanggal_sidang = $conn->real_escape_string(trim($_POST['tanggal_sidang']));
+    }
     
-  
+    
+    
     // If submit is true, insert the data
     if ($submit) {
   
       // Membuat data mahasiswa yang sudah tersambung ke user_id
       $query = "INSERT INTO skripsi (nim, id_status, nilai, lama_studi, tanggal_sidang) VALUES ('$nim', '$id_status', '$nilai', '$lama_studi', '$tanggal_sidang')";
   
-      $result = $db->query($query);
+      $result = $conn->query($query);
   
       if (!$result) {
         $success = false;
@@ -43,7 +51,7 @@ if (isset($_POST['submit'])) {
         $nilai = "";
       }
   
-      $db->close();
+      $conn->close();
     }
   }
 ?>

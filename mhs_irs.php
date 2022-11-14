@@ -81,7 +81,7 @@ if (!isset($_SESSION['username'])) {
                                         <?php endforeach; ?>
                                     </table>
                                     <br>
-                                    <?php echo 'Jumlah Data = ' . $result->num_rows;
+                                    <?php echo 'Jumlah = ' . $result->num_rows;
                                     $result->free();
                                     $conn->close();
                                     ?>

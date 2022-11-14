@@ -1,7 +1,7 @@
 <?php
 session_start(); //inisialisasi session
 require_once('config.php');
-$nim = $_SESSION['username']; 
+$nim = $_SESSION['nim'];
 
 // Check if already submit the form
 if (isset($_POST['submit'])) {
@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $error_smt = "Semester tidak boleh kosong";
     $submit = false;
   } else {
-    $smt = $db->real_escape_string(trim($_POST['smt']));
+    $smt = $conn->real_escape_string(trim($_POST['smt']));
   }
 
   // Check if sks is empty
@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     $error_sks = "SKS tidak boleh kosong";
     $submit = false;
   } else {
-    $sks = $db->real_escape_string(trim($_POST['sks']));
+    $sks = $conn->real_escape_string(trim($_POST['sks']));
   }
 
   // Check if sks_kumulatif is empty
@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
     $error_sks_kumulatif = "SKS Kumulatif tidak boleh kosong";
     $submit = false;
   } else {
-    $sks_kumulatif = $db->real_escape_string(trim($_POST['sks_kumulatif']));
+    $sks_kumulatif = $conn->real_escape_string(trim($_POST['sks_kumulatif']));
   }
 
   // Check if ip is empty
@@ -35,14 +35,14 @@ if (isset($_POST['submit'])) {
     $error_ip = "IP tidak boleh kosong";
     $submit = false;
   } else {
-    $ip = $db->real_escape_string(trim($_POST['ip']));
+    $ip = $conn->real_escape_string(trim($_POST['ip']));
   }
   // Check if ipk is empty
   if (empty($_POST['ipk'])) {
     $error_ipk = "ipk tidak boleh kosong";
     $submit = false;
   } else {
-    $ipk = $db->real_escape_string(trim($_POST['ipk']));
+    $ipk = $conn->real_escape_string(trim($_POST['ipk']));
   }
 
   // If submit is true, insert the data
@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
     // Membuat data mahasiswa yang sudah tersambung ke user_id
     $query = "INSERT INTO khs (nim, smt, sks, sks_kumulatif, ip, ipk) VALUES ('$nim', '$smt', '$sks','$sks_kumulatif', '$ip', '$ipk')";
 
-    $result = $db->query($query);
+    $result = $conn->query($query);
 
     if (!$result) {
       $success = false;
@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
 
     }
 
-    $db->close();
+    $conn->close();
   }
 }
 

@@ -36,6 +36,7 @@ $nim = $_SESSION['username'];
 
             <!-- Main Content -->
             <div id="content">
+                <?php include('header.html')?>
 
                 <!-- Topbar -->
                 <!-- End of Topbar -->

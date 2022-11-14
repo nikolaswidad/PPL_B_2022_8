@@ -35,6 +35,8 @@ $nim = $_SESSION['username'];
 
             <!-- Main Content -->
             <div id="content">
+            <?php include('header.html')?>
+            
             <div class="card">
                     <!-- If there is success variable, show message -->
                     

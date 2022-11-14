@@ -1,7 +1,7 @@
 <?php
 session_start(); //inisialisasi session
 require_once('config.php');
-$nim = $_SESSION['username']; 
+$nim = $_SESSION['nim'];
 
 // Check if already submit the form
 if (isset($_POST['submit'])) {
@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $error_id_status = "Semester tidak boleh kosong";
     $submit = false;
   } else {
-    $id_status = $db->real_escape_string(trim($_POST['id_status']));
+    $id_status = $conn->real_escape_string(trim($_POST['id_status']));
   }
 
   // Check if nilai is empty
@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     $error_nilai = "nilai tidak boleh kosong";
     $submit = false;
   } else {
-    $nilai = $db->real_escape_string(trim($_POST['nilai']));
+    $nilai = $conn->real_escape_string(trim($_POST['nilai']));
   }
 
   // If submit is true, insert the data
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     // Membuat data mahasiswa yang sudah tersambung ke user_id
     $query = "INSERT INTO pkl (nim, id_status, nilai) VALUES ('$nim', '$id_status', '$nilai')";
 
-    $result = $db->query($query);
+    $result = $conn->query($query);
 
     if (!$result) {
       $success = false;
@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
       $nilai = "";
     }
 
-    $db->close();
+    $conn->close();
   }
 }
 
