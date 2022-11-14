@@ -1,6 +1,6 @@
 <?php
 session_start(); //inisialisasi session
-require_once('../config.php');
+require_once('config.php');
 $nim = $_SESSION['nim'];
 
 // Check if already submit the form

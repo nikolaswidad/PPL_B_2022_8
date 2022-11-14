@@ -54,7 +54,7 @@ if (!isset($_SESSION['username'])) {
                                         </tr>
                                         <?php
 
-                                        require_once '../config.php';
+                                        require_once 'config.php';
 
                                         $query = "SELECT * FROM irs INNER JOIN mhs ON irs.nim = mhs.nim ORDER BY smt";  
                                         $result = mysqli_query($conn, $query);
@@ -81,7 +81,7 @@ if (!isset($_SESSION['username'])) {
                                         <?php endforeach; ?>
                                     </table>
                                     <br>
-                                    <?php echo 'Total Rows = ' . $result->num_rows;
+                                    <?php echo 'Jumlah Data = ' . $result->num_rows;
                                     $result->free();
                                     $conn->close();
                                     ?>
