@@ -1,47 +1,8 @@
 <?php
-session_start(); //inisialisasi session
-require_once('config.php');
-$nim = $_SESSION['username']; 
 
-// Check if already submit the form
-if (isset($_POST['submit'])) {
-  $submit = true;
-  // Check if smt is empty
-  if (empty($_POST['smt'])) {
-    $error_smt = "Semester tidak boleh kosong";
-    $submit = false;
-  } else {
-    $smt = $db->real_escape_string(trim($_POST['smt']));
-  }
-
-  // Check if sks is empty
-  if (empty($_POST['sks'])) {
-    $error_sks = "SKS tidak boleh kosong";
-    $submit = false;
-  } else {
-    $sks = $db->real_escape_string(trim($_POST['sks']));
-  }
-
-  // If submit is true, insert the data
-  if ($submit) {
-
-    // Membuat data mahasiswa yang sudah tersambung ke user_id
-    $query = "INSERT INTO irs (nim, smt, sks) VALUES ('$nim', '$smt', '$sks')";
-
-    $result = $db->query($query);
-
-    if (!$result) {
-      $success = false;
-      $error_message = "Gagal menyimpan!";
-    } else {
-      $success = true;
-      // Clear all the input
-      $smt = "";
-      $sks = "";
-    }
-
-    $db->close();
-  }
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
 }
 
 
@@ -75,61 +36,81 @@ if (isset($_POST['submit'])) {
             <div id="content">
                 <?php include('header.html'); ?>
                 <div class="container-fluid">
+                    <div class="s">
+                        <div class="container">
+                            <div class="card mt-4">
+                                <div class="card-header">DATA IRS</div>
+                                <div class="card-body">
+                                    <br>
+                                    <a class="btn btn-primary mb-3" href="mhs_irs_add.php">+ Tambah Data IRS</a>
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>NIM</th>
+                                            <th>Semester</th>
+                                            <th>Beban SKS</th>
+                                            <th>Scan</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        <?php
 
+                                        require_once '../config.php';
 
+                                        $query = "SELECT * FROM irs INNER JOIN mhs ON irs.nim = mhs.nim ORDER BY smt";  
+                                        $result = mysqli_query($conn, $query);
 
-                    <!-- Page Heading -->
-              <!-- General Form Elements -->
-              <!-- General Form Elements -->
+                                        if (!$result) {
+                                            die("Could not query the database: <br>" . $conn->error . "<br>Query: " . $query);
+                                        }
 
-              <div class="card">
-                <!-- If there is success variable, show message -->
-                <?php if (isset($success)) : ?>
-                  <?php if ($success) : ?>
-                    <div class="alert alert-success" role="alert">
-                      Berhasil Menambahkan
-                    </div>
-                  <?php else : ?>
-                    <div class="alert alert-danger" role="alert">
-                      <?php echo $error_message ?>
-                    </div>
-                  <?php endif; ?>
-                <?php endif; ?>
+                                        //fetch data
 
-                <div class="card-header">Masukkan Data IRS</div>
-                <div class="card-body">
-                  <!-- /* TODO definisikan method dan actions */ -->
-                  <form name="daftar" method="POST" action="">
-                      
-                    <div class="row mb-3">
-                          <label for="name" class="col-sm-2 col-form-label">Semester</label>
-                          <div class="col-sm-10">                        
-                              <input type="text" name="smt" id="smt" class="form-control" value="<?php if (isset($smt)) echo $smt; ?>">
-                              <div id="error_name" style="color: red;">
-                                <php if (isset($error_smt))  echo $error_smt ?>  
+                                        $i = 1;
+                                        ?>
+                                        <?php foreach ($result as $res) : ?>
+                                            <tr id=delete<?php echo $res["nim"]; ?>>
+                                                <td><?php echo $i++; ?></td>
+                                                <td><?php echo $res["nim"]; ?></td>
+                                                <td><?php echo $res["smt"]; ?></td>
+                                                <td><?php echo $res["sks"]; ?></td>
+                                                <td><?php echo $res["scan"]; ?></td>
+                                                <td>
+                                                    <button type="button" onclick="deleteData(<?php echo $res['nim']; ?>)" class="btn btn-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                    <br>
+                                    <?php echo 'Total Rows = ' . $result->num_rows;
+                                    $result->free();
+                                    $conn->close();
+                                    ?>
+                                    <br><br>
+                                    </table>
+                                </div>
                             </div>
                         </div>
+
+                        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+                        <script>
+                            function deleteData(id) {
+                                var conf = confirm("Are you sure, do you really want to delete Customer?");
+                                if (conf == true) {
+                                    $.ajax({
+                                        url: "delete_post.php",
+                                        type: "POST",
+                                        data: {
+                                            id: id
+                                        },
+                                        success: function(data) {
+                                            $("#delete" + id).hide('slow');
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
                     </div>
-                    <div class="row mb-3">
-                      <label for="sks" class="col-sm-2 col-form-label">Jumlah SKS</label>
-                      <div class="col-sm-10">                        
-                          <input type="text" name="sks" id="sks" class="form-control" value="<?php if (isset($sks)); ?>">
-                          <!-- <div id="error_name" style="color: red;">
-                              <?php if (isset($error_sks))  echo $error_sks ?>
-                            </div> -->
-                        </div>
-                    </div>
-                    <div class="row mb-3" action="upload.php" method="post" enctype="multipart/form-data">
-                      <label for="inputNumber" class="col-sm-2 col-form-label">Upload Foto</label>
-                      <div class="col-sm-10">
-                        <input class="form-control" type="file" id="formFile">
-                      </div>
-                    </div>
-                    <br>
-                    <button type="submit" name="submit" id="submit" value="submit" class="btn btn-primary container-fluid">Simpan</button>
-                  </form>
-                </div>
-              </div>
                 </div>
                 <!-- /.container-fluid -->
 
