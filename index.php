@@ -47,7 +47,7 @@ if(isset($_POST['submit'])){
       elseif($row['user_type'] == 'Departemen'){
 
          $_SESSION['username'] = $row['email'];
-         header('location:departemen_page.php');
+         header('location:departemen_datamhs.php');
 
       }
      
