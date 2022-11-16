@@ -115,6 +115,7 @@ if (isset($_POST['submit'])) {
       $error_message = "Data Sudah Ada";
     } else {
       $success = true;
+      header('location: mhs_view_data-diri.php');
     }
 
     $conn->close();
@@ -176,141 +177,141 @@ if (isset($_POST['submit'])) {
                 <?php endif; ?>
 
                 <div class="card-header">Masukkan Data Diri</div>
-                <div class="card-body">
-                  <!-- /* TODO definisikan method dan actions */ -->
-                  <form name="daftar" method="POST" action="" >
-                    <div class="row mb-3" action="upload.php" method="post" enctype="multipart/form-data">
-                      <label for="inputNumber" class="col-sm-2 col-form-label">Upload Foto</label>
-                      <div class="col-sm-10">
-                        <input class="form-control" type="file" id="formFile">
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
-                      <div class="col-sm-10">                        
-                        <input type="text" name="nama" id="nama" class="form-control" value="<?php if (isset($nama)) echo $nama; ?>">
-                        <div id="error_name" style="color: red;">
-                          <?php if (isset($error_nama))  echo $error_nama ?>
+                  <div class="card-body">
+                    <!-- /* TODO definisikan method dan actions */ -->
+                    <form name="daftar" method="POST" action="" >
+                      <div class="row mb-3" action="upload.php" method="post" enctype="multipart/form-data">
+                        <label for="inputNumber" class="col-sm-2 col-form-label">Upload Foto</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="file" id="formFile">
                         </div>
                       </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="nim" class="col-sm-2 col-form-label">NIM</label>
-                      <div class="col-sm-10">                        
-                        <input type="text" name="nim" id="nim" class="form-control" value="<?php if (isset($nim)) echo $nim; ?>">
-                        <!-- <div id="error_name" style="color: red;">
-                          <?php if (isset($error_nim))  echo $error_nim ?>
-                        </div> -->
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="angkatan" class="col-sm-2 col-form-label">Angkatan</label>
-                      <div class="col-sm-10">  
-                        <input type="text" name="angkatan" id="angkatan" class="form-control" value="<?php if (isset($angkatan)) echo $angkatan; ?>">
-                        <div id="error_name" style="color: red;">
-                          <?php if (isset($error_angkatan))  echo $error_angkatan ?>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <!-- get status -->
-                    <div class="row mb-3">
-                      <label for="status_mhs" class="col-sm-2 col-form-label">Status Mahasiswa</label>
-                      <div class="col-sm-10">  
-                        <select name="status_mhs" id="status_mhs" class="form-control">
-                          <option value="" selected disabled>Pilih Status</option>
-                          <option value="Aktif">Aktif</option>
-                          <option value="Cuti">Cuti</option>
-                          <option value="Mangkir">Mangkir</option>
-                          <option value="DO">DO</option>
-                          <option value="Undur Diri">Undur Diri</option>
-                          <option value="Lulus">Lulus</option>
-                          <option value="Meninggal">Meninggal</option>
-                        </select>
-                        <div id="error_status_mhs" style="color: red;">
-                          <?php if (isset($error_status_mhs))  echo $error_status_mhs ?>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- get dosen -->
-                    <div class="row mb-3">
-                      <label for="nip" class="col-sm-2 col-form-label">Dosen Wali</label>
-                      <div class="col-sm-10">  
-                        <select name="nip" id="nip" class="form-control">
-                          <option value="">Pilih Dosen Wali</option>
-                          <?php 
-                          $query = "SELECT * FROM dosen";
-                          $result = mysqli_query($conn, $query);
-                          while ($row = $result->fetch_object()) {
-                            echo "<option value='" . $row->nip . "'>" . $row->nama . "</option>";
-                          }
-                          ?>
-                        </select>
-                        <div id="error_nip" style="color: red;">
-                          <?php if (isset($error_nip))  echo $error_nip ?>
-                        </div>
-                      </div>
-                    </div>
                       
                       <div class="row mb-3">
-                        <label for="hp" class="col-sm-2 col-form-label">Nomor HP</label>
-                        <div class="col-sm-10">    
-                          <input type="text" name="hp" id="hp" class="form-control" value="<?php if (isset($hp)) echo $hp; ?>">
+                        <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
+                        <div class="col-sm-10">                        
+                          <input type="text" name="nama" id="nama" class="form-control" value="<?php if (isset($nama)) echo $nama; ?>">
                           <div id="error_name" style="color: red;">
-                            <?php if (isset($error_hp))  echo $error_hp ?>
+                            <?php if (isset($error_nama))  echo $error_nama ?>
                           </div>
                         </div>
                       </div>
                       <div class="row mb-3">
-                      <label for="email" class="col-sm-2 col-form-label">Email</label>
-                      <div class="col-sm-10">                        
-                        <input type="text" name="email" id="email" class="form-control" value="<?php if (isset($email)) echo $email; ?>" readonly>
-                        <!-- <div id="error_name" style="color: red;">
-                          <?php if (isset($error_email))  echo $error_email ?>
-                        </div> -->
-                      </div>
-                    </div>
-                      <div class="row mb-3">
-                        <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-                        <div class="col-sm-10">    
-                          <textarea name="alamat" id="alamat" rows="3" class="form-control"><?php if (isset($alamat)) echo $alamat; ?></textarea>
-                          <div id="error_alamat" style="color: red;">
-                            <?php if (isset($error_alamat))  echo $error_alamat ?>
-                          </div>
+                        <label for="nim" class="col-sm-2 col-form-label">NIM</label>
+                        <div class="col-sm-10">                        
+                          <input type="text" name="nim" id="nim" class="form-control" value="<?php if (isset($nim)) echo $nim; ?>">
+                          <!-- <div id="error_name" style="color: red;">
+                            <?php if (isset($error_nim))  echo $error_nim ?>
+                          </div> -->
                         </div>
                       </div>
                       <div class="row mb-3">
-                        <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
-                        <div class="col-sm-10">    
-                          <select onchange="getKabupaten()" name="provinsi" id="provinsi" class="form-control">
-                            <option value="">Pilih Provinsi</option>
-                            <!-- /* TODO tampilkan daftar provinsi menggunakan ajax */ -->
-                            <!-- DONE: Ditaruh di body onload -->
+                        <label for="angkatan" class="col-sm-2 col-form-label">Angkatan</label>
+                        <div class="col-sm-10">  
+                          <input type="text" name="angkatan" id="angkatan" class="form-control" value="<?php if (isset($angkatan)) echo $angkatan; ?>">
+                          <div id="error_name" style="color: red;">
+                            <?php if (isset($error_angkatan))  echo $error_angkatan ?>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- get status -->
+                      <div class="row mb-3">
+                        <label for="status_mhs" class="col-sm-2 col-form-label">Status Mahasiswa</label>
+                        <div class="col-sm-10">  
+                          <select name="status_mhs" id="status_mhs" class="form-control">
+                            <option value="" selected disabled>Pilih Status</option>
+                            <option value="Aktif">Aktif</option>
+                            <option value="Cuti">Cuti</option>
+                            <option value="Mangkir">Mangkir</option>
+                            <option value="DO">DO</option>
+                            <option value="Undur Diri">Undur Diri</option>
+                            <option value="Lulus">Lulus</option>
+                            <option value="Meninggal">Meninggal</option>
                           </select>
-                          <div id="error_provinsi" style="color: red;">
-                            <?php if (isset($error_provinsi))  echo $error_provinsi ?>
+                          <div id="error_status_mhs" style="color: red;">
+                            <?php if (isset($error_status_mhs))  echo $error_status_mhs ?>
                           </div>
                         </div>
                       </div>
+
+                      <!-- get dosen -->
                       <div class="row mb-3">
-                        <label for="kabupaten" class="col-sm-2 col-form-label">Kota/Kabupaten</label>
-                        <div class="col-sm-10">    
-                          <select name="kabupaten" id="kabupaten" class="form-control">
-                          <option value="">Pilih Kota/Kabupaten</option>
-                          <!-- /* TODO tampilkan daftar kabupaten berdasarkan pilihan provinsi sebelumnya, menggunakan ajax*/ -->
-                          <!-- DONE: onchange bagian provinsi -->
+                        <label for="nip" class="col-sm-2 col-form-label">Dosen Wali</label>
+                        <div class="col-sm-10">  
+                          <select name="nip" id="nip" class="form-control">
+                            <option value="">Pilih Dosen Wali</option>
+                            <?php 
+                            $query = "SELECT * FROM dosen";
+                            $result = mysqli_query($conn, $query);
+                            while ($row = $result->fetch_object()) {
+                              echo "<option value='" . $row->nip . "'>" . $row->nama . "</option>";
+                            }
+                            ?>
                           </select>
-                          <div id="error_kabupaten" style="color: red;">
-                            <?php if (isset($error_kabupaten))  echo $error_kabupaten ?>
+                          <div id="error_nip" style="color: red;">
+                            <?php if (isset($error_nip))  echo $error_nip ?>
                           </div>
                         </div>
-                    </div>
-                    <br>
-                    <button type="submit" name="submit" id="submit" value="submit" class="btn btn-primary container-fluid">Simpan</button>
-                  </form>
-                </div>
+                      </div>
+                        
+                        <div class="row mb-3">
+                          <label for="hp" class="col-sm-2 col-form-label">Nomor HP</label>
+                          <div class="col-sm-10">    
+                            <input type="text" name="hp" id="hp" class="form-control" value="<?php if (isset($hp)) echo $hp; ?>">
+                            <div id="error_name" style="color: red;">
+                              <?php if (isset($error_hp))  echo $error_hp ?>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">                        
+                          <input type="text" name="email" id="email" class="form-control" value="<?php if (isset($email)) echo $email; ?>" readonly>
+                          <!-- <div id="error_name" style="color: red;">
+                            <?php if (isset($error_email))  echo $error_email ?>
+                          </div> -->
+                        </div>
+                      </div>
+                        <div class="row mb-3">
+                          <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                          <div class="col-sm-10">    
+                            <textarea name="alamat" id="alamat" rows="3" class="form-control"><?php if (isset($alamat)) echo $alamat; ?></textarea>
+                            <div id="error_alamat" style="color: red;">
+                              <?php if (isset($error_alamat))  echo $error_alamat ?>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
+                          <div class="col-sm-10">    
+                            <select onchange="getKabupaten()" name="provinsi" id="provinsi" class="form-control">
+                              <option value="">Pilih Provinsi</option>
+                              <!-- /* TODO tampilkan daftar provinsi menggunakan ajax */ -->
+                              <!-- DONE: Ditaruh di body onload -->
+                            </select>
+                            <div id="error_provinsi" style="color: red;">
+                              <?php if (isset($error_provinsi))  echo $error_provinsi ?>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label for="kabupaten" class="col-sm-2 col-form-label">Kota/Kabupaten</label>
+                          <div class="col-sm-10">    
+                            <select name="kabupaten" id="kabupaten" class="form-control">
+                            <option value="">Pilih Kota/Kabupaten</option>
+                            <!-- /* TODO tampilkan daftar kabupaten berdasarkan pilihan provinsi sebelumnya, menggunakan ajax*/ -->
+                            <!-- DONE: onchange bagian provinsi -->
+                            </select>
+                            <div id="error_kabupaten" style="color: red;">
+                              <?php if (isset($error_kabupaten))  echo $error_kabupaten ?>
+                            </div>
+                          </div>
+                      </div>
+                      <br>
+                      <button type="submit" name="submit" id="submit" value="submit" class="btn btn-primary container-fluid">Simpan</button>
+                    </form>
+                  </div>
               </div>
                 </div>
                 <!-- /.container-fluid -->

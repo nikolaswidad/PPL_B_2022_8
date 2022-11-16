@@ -76,7 +76,7 @@ $nim = $_SESSION['nim'];
                                             echo '<td><a href="upload/' .$row['scan'] . '">' .$row
                                             ['scan'].'</a></td>';
                                             echo '<td>
-                                            <a class="btn btn-danger btn-sm" href="mhs_khs_delete.php?id=' . $row["smt"] . '">Delete</a>
+                                            <a class="btn btn-danger btn-sm" href="mhs_khs_delete.php?id=' . $row["smt"] . '">Hapus</a>
                                             </td>';
                                             echo "</tr>";
                                             $i++;

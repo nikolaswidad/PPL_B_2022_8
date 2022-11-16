@@ -1,49 +1,10 @@
 <?php
+
 session_start(); //inisialisasi session
 require_once('config.php');
+$email = $_SESSION['username'];
+$id_user = $_SESSION['user_id'];
 $nim = $_SESSION['nim'];
-
-// Check if already submit the form
-if (isset($_POST['submit'])) {
-  $submit = true;
-  // Check if id_status is empty
-  if (empty($_POST['id_status'])) {
-    $error_id_status = "Semester tidak boleh kosong";
-    $submit = false;
-  } else {
-    $id_status = $conn->real_escape_string(trim($_POST['id_status']));
-  }
-
-  // Check if nilai is empty
-  if (empty($_POST['nilai'])) {
-    $error_nilai = "nilai tidak boleh kosong";
-    $submit = false;
-  } else {
-    $nilai = $conn->real_escape_string(trim($_POST['nilai']));
-  }
-
-  // If submit is true, insert the data
-  if ($submit) {
-
-    // Membuat data mahasiswa yang sudah tersambung ke user_id
-    $query = "INSERT INTO pkl (nim, id_status, nilai) VALUES ('$nim', '$id_status', '$nilai')";
-
-    $result = $conn->query($query);
-
-    if (!$result) {
-      $success = false;
-      $error_message = "Gagal menyimpan!";
-    } else {
-      $success = true;
-      // Clear all the input
-      $id_status = "";
-      $nilai = "";
-    }
-
-    $conn->close();
-  }
-}
-
 
 ?>
 
@@ -63,7 +24,7 @@ if (isset($_POST['submit'])) {
 
 </head>
 
-<body id="page-top" onload="getProvinsi()">
+<body id="page-top">
     
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -84,65 +45,82 @@ if (isset($_POST['submit'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                <div class="s">
+                        <div class="container">
+                            <div class="card mt-4">
+                                <div class="card-header">DATA PKL</div>
+                                <div class="card-body">
+                                    <br>
+                                    <a class="btn btn-primary mb-3" href="mhs_pkl_add.php">+ Tambah Data PKL</a>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>NIM</th>
+                                                <th>Status</th>
+                                                <th>Nilai</th>
+                                                <th>Scan</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $query = "SELECT * FROM pkl WHERE nim = '$nim'";
+                                            $result = $conn->query($query);
+                                            $i = 1;
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<tr>";
+                                                echo "<td>".$i."</td>";
+                                                echo "<td>".$row['nim']."</td>";
+                                                echo "<td>".$row['id_status']."</td>";
+                                                echo "<td>".$row['nilai']."</td>";
+                                                echo '<td><a href="upload/' .$row['scan'] . '">' .$row
+                                                ['scan'].'</a></td>';
+                                                echo '<td>
+                                                <a class="btn btn-danger btn-sm" href="mhs_pkl_delete.php?id=' . $row["id"] . '">Hapus</a>
+                                                </td>';
+                                                echo "</tr>";
+                                                $i++;
+                                            }
+                                            foreach($conn->query("SELECT SUM(sks) FROM irs WHERE nim = '$nim'") as $sum_sks);
+                                            ?>
+                                            <!-- <a class="btn btn-warning btn-sm" href="mhs_irs_edit.php?smt='.$row["smt"].'">Edit</a> -->
 
-                    <!-- Page Heading -->
-              <!-- General Form Elements -->
-              <!-- General Form Elements -->
 
-              <div class="card">
-                <!-- If there is success variable, show message -->
-                <?php if (isset($success)) : ?>
-                  <?php if ($success) : ?>
-                    <div class="alert alert-success" role="alert">
-                      Berhasil Menambahkan
-                    </div>
-                  <?php else : ?>
-                    <div class="alert alert-danger" role="alert">
-                      <?php echo $error_message ?>
-                    </div>
-                  <?php endif; ?>
-                <?php endif; ?>
+                                        
+                                    </table>
+                                    <br>
+                                    <?php
 
-                <div class="card-header">Masukkan Data PKL</div>
-                <div class="card-body">
-                  <!-- /* TODO definisikan method dan actions */ -->
-                  <form name="daftar" method="POST" action="">
-
-                    <div class="row mb-3">
-                      <label for="id_status" class="col-sm-2 col-form-label">Status PKL</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="id_status" name="id_status">
-                                <option value="" selected disabled>Pilih Status</option>
-                                <option value="Belum Ambil">Belum Ambil</option>
-                                <option value="Sedang Ambil">Sedang Ambil</option>
-                                <option value="Lulus">Lulus</option>
-                            </select>
+                                    $result->free();
+                                    $conn->close();
+                                    ?>
+                                    <br><br>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
+
+                        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+                        <script>
+                            function deleteData(id) {
+                                var conf = confirm("Are you sure, do you really want to delete Customer?");
+                                if (conf == true) {
+                                    $.ajax({
+                                        url: "delete_post.php",
+                                        type: "POST",
+                                        data: {
+                                            id: id
+                                        },
+                                        success: function(data) {
+                                            $("#delete" + id).hide('slow');
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
                     </div>
-                    <div class="row mb-3">
-                      <label for="nilai" class="col-sm-2 col-form-label">Nilai</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="semester" name="semester">
-                                <option value="" selected disabled>Pilih Nilai</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3" action="upload.php" method="post" enctype="multipart/form-data">
-                      <label for="inputNumber" class="col-sm-2 col-form-label">Upload Foto</label>
-                      <div class="col-sm-10">
-                        <input class="form-control" type="file" id="formFile">
-                      </div>
-                    </div>
-                    <br>
-                    <button type="submit" name="submit" id="submit" value="submit" class="btn btn-primary container-fluid">Simpan</button>
-                  </form>
-                </div>
-              </div>
                 </div>
                 <!-- /.container-fluid -->
 
