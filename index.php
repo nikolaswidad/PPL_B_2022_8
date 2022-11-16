@@ -7,8 +7,6 @@ if(isset($_POST['submit'])){
 
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = md5($_POST['password']);
-   $cpass = md5($_POST['cpassword']);
-   $user_type = $_POST['user_type'];
 
    $select = " SELECT * FROM user WHERE email = '$email' && password = '$pass' ";
    $select_user = " SELECT * FROM mhs WHERE email = '$email' ";
@@ -34,7 +32,7 @@ if(isset($_POST['submit'])){
 
          $_SESSION['username'] = $row['email'];
          $_SESSION['user_id'] = $row['id'];
-         header('location: mhs_data-diri.php');
+         header('location: mhs_view_data-diri.php');
 
       }
       elseif($row['user_type'] == 'Dosen'){
@@ -104,10 +102,6 @@ if(isset($_POST['submit'])){
                                     <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Hai Siap2 Ya..</h1>
                                     <div id="error" class="text-danger">
-                                        <?php if (isset($error)) echo $error; ?>
-                                    </div>
-                                    </div>
-                                        <form method="POST" autocomplete="on" action="">
                                           <?php
                                           if(isset($error)){
                                              foreach($error as $error){
@@ -115,6 +109,9 @@ if(isset($_POST['submit'])){
                                              };
                                           };
                                           ?>
+                                    </div>
+                                    </div>
+                                        <form method="POST" autocomplete="on" action="">
                                           <div class="form-group">
                                              <label for="username">Email</label>
                                              <input type="email" name="email" required placeholder="enter your email" class="form-control">
