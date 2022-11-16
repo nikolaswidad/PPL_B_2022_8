@@ -55,12 +55,13 @@ $nim = $_SESSION['username'];
                             <th scope="col">NIM</th>
                             <th scope="col">Angkatan</th>
                             <th scope="col">Nilai</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Scan</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php
-                        $query = "SELECT * FROM pkl as s INNER JOIN mhs as m ON s.nim = m.nim where id_status='Sudah Ambil'" ;
+                        $query = "SELECT * FROM pkl as s INNER JOIN mhs as m ON s.nim = m.nim " ;
                         $result = $conn->query($query);
                         $i = 1;
                         while ($row = $result->fetch_assoc()) {
@@ -70,7 +71,8 @@ $nim = $_SESSION['username'];
                             echo "<td>".$row['nim']."</td>";
                             echo "<td>".$row['angkatan']."</td>";
                             echo "<td>".$row['nilai']."</td>";
-                            echo '<td><a class="btn btn-info" href="#">Lihat</a></td>';
+                            echo "<td>".$row['id_status']."</td>";
+                            echo '<td><a class="btn btn-info" href="upload/' .$row['scan'] . '">Lihat</a></td>';
                             echo "</tr>";
                             $i++;
                         }
