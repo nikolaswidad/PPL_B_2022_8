@@ -1,75 +1,11 @@
 <?php
+
 session_start(); //inisialisasi session
 require_once('config.php');
+$email = $_SESSION['username'];
+$id_user = $_SESSION['user_id'];
 $nim = $_SESSION['nim'];
 
-// Check if already submit the form
-if (isset($_POST['submit'])) {
-  $submit = true;
-  // Check if smt is empty
-  if (empty($_POST['smt'])) {
-    $error_smt = "Semester tidak boleh kosong";
-    $submit = false;
-  } else {
-    $smt = $conn->real_escape_string(trim($_POST['smt']));
-  }
-
-  // Check if sks is empty
-  if (empty($_POST['sks'])) {
-    $error_sks = "SKS tidak boleh kosong";
-    $submit = false;
-  } else {
-    $sks = $conn->real_escape_string(trim($_POST['sks']));
-  }
-
-  // Check if sks_kumulatif is empty
-  if (empty($_POST['sks_kumulatif'])) {
-    $error_sks_kumulatif = "SKS Kumulatif tidak boleh kosong";
-    $submit = false;
-  } else {
-    $sks_kumulatif = $conn->real_escape_string(trim($_POST['sks_kumulatif']));
-  }
-
-  // Check if ip is empty
-  if (empty($_POST['ip'])) {
-    $error_ip = "IP tidak boleh kosong";
-    $submit = false;
-  } else {
-    $ip = $conn->real_escape_string(trim($_POST['ip']));
-  }
-  // Check if ipk is empty
-  if (empty($_POST['ipk'])) {
-    $error_ipk = "ipk tidak boleh kosong";
-    $submit = false;
-  } else {
-    $ipk = $conn->real_escape_string(trim($_POST['ipk']));
-  }
-
-  // If submit is true, insert the data
-  if ($submit) {
-
-    // Membuat data mahasiswa yang sudah tersambung ke user_id
-    $query = "INSERT INTO khs (nim, smt, sks, sks_kumulatif, ip, ipk) VALUES ('$nim', '$smt', '$sks','$sks_kumulatif', '$ip', '$ipk')";
-
-    $result = $conn->query($query);
-
-    if (!$result) {
-      $success = false;
-      $error_message = "Gagal menyimpan!";
-    } else {
-      $success = true;
-      // Clear all the input
-      $smt = "";
-      $sks = "";
-      $sks_kumulatif = "";
-      $ip = "";
-      $ipk = "";
-
-    }
-
-    $conn->close();
-  }
-}
 
 
 ?>
@@ -91,103 +27,98 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body id="page-top">
-
+    
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Sidebar -->
-        <?php include('mhs_nav.html'); ?>
-
+    <?php include('mhs_nav.html'); ?>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
-
                 <?php include('header.html'); ?>
-
-                <!-- Begin Page Content -->
                 <div class="container-fluid">
-              <!-- General Form Elements -->
-                <div class="card">
-                  <!-- If there is success variable, show message -->
-                  <?php if (isset($success)) : ?>
-                    <?php if ($success) : ?>
-                      <div class="alert alert-success" role="alert">
-                        Berhasil Menambahkan
-                      </div>
-                    <?php else : ?>
-                      <div class="alert alert-danger" role="alert">
-                        <?php echo $error_message ?>
-                      </div>
-                    <?php endif; ?>
-                  <?php endif; ?>
-
-                  <div class="card-header">Masukkan Data KHS</div>
-                  <div class="card-body">
-                    <!-- /* TODO definisikan method dan actions */ -->
-                    <form name="daftar" method="POST" action="">
-                        
-                      <div class="row mb-3">
-                            <label for="name" class="col-sm-2 col-form-label">Semester</label>
-                            <div class="col-sm-10">                        
-                                <input type="text" name="smt" id="smt" class="form-control" value="<?php if (isset($smt)) echo $smt; ?>">
-                                <div id="error_name" style="color: red;">
-                                  <php if (isset($error_smt))  echo $error_smt ?>  
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="sks" class="col-sm-2 col-form-label">SKS Semester</label>
-                        <div class="col-sm-10">                        
-                            <input type="text" name="sks" id="sks" class="form-control" value="<?php if (isset($sks)); ?>">
-                            <!-- <div id="error_name" style="color: red;">
-                                <?php if (isset($error_sks))  echo $error_sks ?>
-                              </div> -->
-                          </div>
-                      </div>
-
-                      <div class="row mb-3">
-                          <label for="name" class="col-sm-2 col-form-label">SKS Kumulatif</label>
-                          <div class="col-sm-10">                        
-                                <input type="text" name="sks_kumulatif" id="sks_kumulatif" class="form-control" value="<?php if (isset($sks_kumulatif)) echo $sks_kumulatif; ?>">
-                                <div id="error_name" style="color: red;">
-                                  <php if (isset($error_sks_kumulatif))  echo $error_sks_kumulatif ?>  
-                          </div>
-                          </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="ip" class="col-sm-2 col-form-label">IP Semester</label>
-                        <div class="col-sm-10">                        
-                            <input type="text" name="ip" id="ip" class="form-control" value="<?php if (isset($ip)); ?>">
-                            <!-- <div id="error_name" style="color: red;">
-                                <?php if (isset($error_ip))  echo $error_ip ?>
-                              </div> -->
-                      </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="ipk" class="col-sm-2 col-form-label">IP Kumulatif</label>
-                        <div class="col-sm-10">                        
-                            <input type="text" name="ipk" id="ipk" class="form-control" value="<?php if (isset($ipk)); ?>">
-                            <!-- <div id="error_name" style="color: red;">
-                                <?php if (isset($error_ipk))  echo $error_ipk ?>
-                              </div> -->
-                          </div>
-                      </div>
+                    <div class="s">
+                        <div class="container">
+                            <div class="card mt-4">
+                                <div class="card-header">DATA KHS</div>
+                                <div class="card-body">
+                                <br>
+                                <a class="btn btn-primary mb-3" href="mhs_khs_add.php">+ Tambah Data KHS</a>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>NIM</th>
+                                            <th>Semester</th>
+                                            <th>Beban SKS</th>
+                                            <th>SKS Kumulatif</th>
+                                            <th>IP</th>
+                                            <th>IPK</th>
+                                            <th>Scan</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                        $query = "SELECT * FROM khs WHERE nim = '$nim' ORDER BY smt ";
+                                        $result = $conn->query($query);
+                                        $i = 1;
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<tr>";
+                                            echo "<td>".$i."</td>";
+                                            echo "<td>".$row['nim']."</td>";
+                                            echo "<td>".$row['smt']."</td>";
+                                            echo "<td>".$row['sks']."</td>";
+                                            echo "<td>".$row['sks_kumulatif']."</td>";
+                                            echo "<td>".$row['ip']."</td>";
+                                            echo "<td>".$row['ipk']."</td>";
+                                            echo '<td><a href="upload/' .$row['scan'] . '">' .$row
+                                            ['scan'].'</a></td>';
+                                            echo '<td>
+                                            <a class="btn btn-danger btn-sm" href="mhs_khs_delete.php?id=' . $row["smt"] . '">Delete</a>
+                                            </td>';
+                                            echo "</tr>";
+                                            $i++;
+                                        }
+                                        ?>
+                                        <!-- <a class="btn btn-warning btn-sm" href="mhs_irs_edit.php?smt='.$row["smt"].'">Edit</a> -->
 
 
-                      <div class="row mb-3" action="upload.php" method="post" enctype="multipart/form-data">
-                        <label for="inputNumber" class="col-sm-2 col-form-label">Upload Foto</label>
-                        <div class="col-sm-10">
-                          <input class="form-control" type="file" id="formFile">
+                                    
+                                </table>
+                                <br>
+                                <?php echo 'Jumlah Data = ' . $result->num_rows;
+
+                                $result->free();
+                                $conn->close();
+                                ?>
+                                <br><br>
+                                </table>
+                                </div>
+                            </div>
                         </div>
-                      </div>
 
-                      
-                      <br>
-                      <button type="submit" name="submit" id="submit" value="submit" class="btn btn-primary container-fluid">Simpan</button>
-                    </form>
-                  </div>
+                        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+                        <script>
+                            function deleteData(id) {
+                                var conf = confirm("Are you sure, do you really want to delete Customer?");
+                                if (conf == true) {
+                                    $.ajax({
+                                        url: "delete_post.php",
+                                        type: "POST",
+                                        data: {
+                                            id: id
+                                        },
+                                        success: function(data) {
+                                            $("#delete" + id).hide('slow');
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
 
@@ -219,7 +150,7 @@ if (isset($_POST['submit'])) {
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.php">Logout</a>
+                    <a class="btn btn-primary" href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
