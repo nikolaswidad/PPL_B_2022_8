@@ -2,7 +2,7 @@
 session_start(); //inisialisasi session
 require_once('config.php');
 $nim = $_SESSION['nim'];
-var_dump($nim);
+
 require_once('function_upload.php');
 
 // Check if already submit the form
