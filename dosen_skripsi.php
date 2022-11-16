@@ -55,12 +55,13 @@ $nim = $_SESSION['username'];
                             <th scope="col">Lama Studi</th>
                             <th scope="col">Tanggal Sidang</th>
                             <th scope="col">Nilai</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Bukti</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php
-                        $query = "SELECT * FROM skripsi as s INNER JOIN mhs as m ON s.nim = m.nim where id_status='Lulus'";
+                        $query = "SELECT * FROM skripsi as s INNER JOIN mhs as m ON s.nim = m.nim ";
                         $result = $conn->query($query);
                         $i = 1;
                         while ($row = $result->fetch_assoc()) {
@@ -72,7 +73,8 @@ $nim = $_SESSION['username'];
                             echo "<td>".$row['lama_studi']." Semester</td>";
                             echo "<td>".$row['tanggal_sidang']."</td>";
                             echo "<td>".$row['nilai']."</td>";
-                            echo '<td><a class="btn btn-info" href="#">Lihat</a></td>';
+                            echo "<td>".$row['id_status']."</td>";
+                            echo '<td><a class="btn btn-info" href="upload/' .$row['scan'] . '">Lihat</a></td>';
                             echo "</tr>";
                             $i++;
                         }
