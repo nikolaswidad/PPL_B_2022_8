@@ -43,7 +43,7 @@ $nim = $_SESSION['username'];
                 <div class="card">
                     <!-- If there is success variable, show message -->
                     
-                    <div class="card-header">Data Lulus Skripsi</div>
+                    <div class="card-header">Data Mahasiswa Skripsi</div>
                         <div class="card-body">
                         <table class="table table-striped table-hover">
                             <thead>
