@@ -1,9 +1,11 @@
 <?php
 
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-}
+session_start(); //inisialisasi session
+require_once('config.php');
+$email = $_SESSION['username'];
+$id_user = $_SESSION['user_id'];
+$nim = $_SESSION['nim'];
+var_dump($nim);
 
 
 ?>
@@ -44,44 +46,48 @@ if (!isset($_SESSION['username'])) {
                                     <br>
                                     <a class="btn btn-primary mb-3" href="mhs_irs_add.php">+ Tambah Data IRS</a>
                                     <table class="table table-striped">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>NIM</th>
-                                            <th>Semester</th>
-                                            <th>Beban SKS</th>
-                                            <th>Scan</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        <?php
-
-                                        require_once 'config.php';
-
-                                        $query = "SELECT * FROM irs INNER JOIN mhs ON irs.nim = mhs.nim ORDER BY smt";  
-                                        $result = mysqli_query($conn, $query);
-
-                                        if (!$result) {
-                                            die("Could not query the database: <br>" . $conn->error . "<br>Query: " . $query);
-                                        }
-
-                                        //fetch data
-
-                                        $i = 1;
-                                        ?>
-                                        <?php foreach ($result as $res) : ?>
-                                            <tr id=delete<?php echo $res["nim"]; ?>>
-                                                <td><?php echo $i++; ?></td>
-                                                <td><?php echo $res["nim"]; ?></td>
-                                                <td><?php echo $res["smt"]; ?></td>
-                                                <td><?php echo $res["sks"]; ?></td>
-                                                <td><?php echo $res["scan"]; ?></td>
-                                                <td>
-                                                    <button type="button" onclick="deleteData(<?php echo $res['nim']; ?>)" class="btn btn-danger">Delete</button>
-                                                </td>
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>NIM</th>
+                                                <th>Semester</th>
+                                                <th>Beban SKS</th>
+                                                <th>Scan</th>
+                                                <th>Action</th>
                                             </tr>
-                                        <?php endforeach; ?>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $query = "SELECT * FROM irs WHERE nim = '$nim' ORDER BY smt ";
+                                            $result = $conn->query($query);
+                                            $i = 1;
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<tr>";
+                                                echo "<td>".$i."</td>";
+                                                echo "<td>".$row['nim']."</td>";
+                                                echo "<td>".$row['smt']."</td>";
+                                                echo "<td>".$row['sks']."</td>";
+                                                echo '<td><a href="upload/' .$row['scan'] . '">' .$row
+                                                ['scan'].'</a></td>';
+                                                echo '<td>
+                                                <a class="btn btn-danger btn-sm" href="mhs_irs_delete.php?id=' . $row["smt"] . '">Delete</a>
+                                                </td>';
+                                                echo "</tr>";
+                                                $i++;
+                                            }
+                                            foreach($conn->query("SELECT SUM(sks) FROM irs WHERE nim = '$nim'") as $sum_sks);
+                                            ?>
+                                            <!-- <a class="btn btn-warning btn-sm" href="mhs_irs_edit.php?smt='.$row["smt"].'">Edit</a> -->
+
+
+                                        
                                     </table>
                                     <br>
-                                    <?php echo 'Jumlah = ' . $result->num_rows;
+                                    <?php echo 'Jumlah Data = ' . $result->num_rows; ?>
+                                    <br>
+                                    <?php
+                                    echo 'SKS Kumulatif = '.$sum_sks['SUM(sks)'];
+
                                     $result->free();
                                     $conn->close();
                                     ?>

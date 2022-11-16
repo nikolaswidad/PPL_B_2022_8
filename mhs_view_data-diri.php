@@ -4,6 +4,7 @@ require_once('config.php');
 $email = $_SESSION['username'];
 $id_user = $_SESSION['user_id'];
 $nim = $_SESSION['nim'];
+var_dump($nim);
 
 $select = "SELECT * FROM mhs WHERE id_user = '$id_user'";
 $result = $conn->query($select);

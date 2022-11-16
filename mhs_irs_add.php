@@ -2,18 +2,27 @@
 session_start(); //inisialisasi session
 require_once('config.php');
 $nim = $_SESSION['nim'];
+var_dump($nim);
+require_once('function_upload.php');
 
 // Check if already submit the form
 if (isset($_POST['submit'])) {
   $submit = true;
+
+  $smt = mysqli_real_escape_string($conn, $_POST['smt']);
+	$sks = mysqli_escape_string($conn, $_POST['sks']);
+	$scan = $_POST['scan'];
+	$lokasi_file = $_FILES['scan']['tmp_name'];
+	$scan = $_FILES['scan']['name'];
+	$dir = "upload/$scan";
+
   // Check if smt is empty
   if (empty($_POST['smt'])) {
     $error_smt = "Semester tidak boleh kosong";
     $submit = false;
   } else {
     $smt = $conn->real_escape_string(trim($_POST['smt']));
-  }
-
+  } 
   // Check if sks is empty
   if (empty($_POST['sks'])) {
     $error_sks = "SKS tidak boleh kosong";
@@ -26,7 +35,9 @@ if (isset($_POST['submit'])) {
   if ($submit) {
 
     // Membuat data mahasiswa yang sudah tersambung ke user_id
-    $query = "INSERT INTO irs (nim, smt, sks) VALUES ('$nim', '$smt', '$sks')";
+    $query = "INSERT INTO irs (nim, smt, sks, scan) VALUES ('$nim', '$smt', '$sks', '$scan')";
+
+		move_uploaded_file($lokasi_file,$dir);
 
     $result = $conn->query($query);
 
@@ -38,6 +49,7 @@ if (isset($_POST['submit'])) {
       // Clear all the input
       $smt = "";
       $sks = "";
+      header('location: mhs_irs.php');
     }
 
     $conn->close();
@@ -99,10 +111,10 @@ if (isset($_POST['submit'])) {
                 <div class="card-header">Masukkan Data IRS</div>
                 <div class="card-body">
                   <!-- /* TODO definisikan method dan actions */ -->
-                  <form name="daftar" method="POST" action="">
+                  <form name="daftar" method="POST" action="" enctype="multipart/form-data">
                       
                     <div class="row mb-3">
-                          <label for="name" class="col-sm-2 col-form-label">Semester</label>
+                          <label for="name" class="col-sm-2 col-form-label">Semester Aktif</label>
                           <div class="col-sm-10">                        
                               <input type="text" name="smt" id="smt" class="form-control" value="<?php if (isset($smt)) echo $smt; ?>">
                               <div id="error_name" style="color: red;">
@@ -111,7 +123,7 @@ if (isset($_POST['submit'])) {
                         </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="sks" class="col-sm-2 col-form-label">Jumlah SKS</label>
+                      <label for="sks" class="col-sm-2 col-form-label">Jumlah SKS diambil</label>
                       <div class="col-sm-10">                        
                           <input type="text" name="sks" id="sks" class="form-control" value="<?php if (isset($sks)); ?>">
                           <!-- <div id="error_name" style="color: red;">
@@ -120,9 +132,9 @@ if (isset($_POST['submit'])) {
                         </div>
                     </div>
                     <div class="row mb-3" action="upload.php" method="post" enctype="multipart/form-data">
-                      <label for="inputNumber" class="col-sm-2 col-form-label">Upload Foto</label>
+                      <label for="inputNumber" class="col-sm-2 col-form-label">Upload Scan</label>
                       <div class="col-sm-10">
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" id="scan" name="scan">
                       </div>
                     </div>
                     <br>
