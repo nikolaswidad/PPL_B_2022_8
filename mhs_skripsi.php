@@ -1,62 +1,14 @@
 <?php
+
 session_start(); //inisialisasi session
 require_once('config.php');
+$email = $_SESSION['username'];
+$id_user = $_SESSION['user_id'];
 $nim = $_SESSION['nim'];
 
-if (isset($_POST['submit'])) {
-    $submit = true;
-    // Check if id_status is empty
-    if (empty($_POST['id_status'])) {
-      $error_id_status = "Semester tidak boleh kosong";
-      $submit = false;
-    } else {
-      $id_status = $conn->real_escape_string(trim($_POST['id_status']));
-    }
-  
-    // Check if nilai is empty
-    if (empty($_POST['nilai'])) {
-        $submit = true;
-    } else {
-        $nilai = $conn->real_escape_string(trim($_POST['nilai']));
-    }
-    // Check if lama is empty
-    if (empty($_POST['lama_studi'])) {
-    } else {
-        $lama_studi = $conn->real_escape_string(trim($_POST['lama_studi']));
-    }
-    
-    // Check if tanggal is empty
-    if ($_POST['tanggal_sidang']) {
-    } else {
-        $tanggal_sidang = $conn->real_escape_string(trim($_POST['tanggal_sidang']));
-    }
-    
-    
-    
-    // If submit is true, insert the data
-    if ($submit) {
-  
-      // Membuat data mahasiswa yang sudah tersambung ke user_id
-      $query = "INSERT INTO skripsi (nim, id_status, nilai, lama_studi, tanggal_sidang) VALUES ('$nim', '$id_status', '$nilai', '$lama_studi', '$tanggal_sidang')";
-  
-      $result = $conn->query($query);
-  
-      if (!$result) {
-        $success = false;
-        $error_message = "Gagal menyimpan!";
-      } else {
-        $success = true;
-        // Clear all the input
-        $id_status = "";
-        $nilai = "";
-      }
-  
-      $conn->close();
-    }
-  }
 ?>
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -73,12 +25,13 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body id="page-top">
-
+    
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
         <?php include('mhs_nav.html'); ?>
+
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -87,93 +40,94 @@ if (isset($_POST['submit'])) {
             <!-- Main Content -->
             <div id="content">
 
-            <?php include('header.html'); ?>
+                <!-- Topbar -->
+                <?php include('header.html'); ?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                <div class="s">
+                        <div class="container">
+                            <div class="card mt-4">
+                                <div class="card-header">DATA Skripsi</div>
+                                <div class="card-body">
+                                    <br>
+                                    <a class="btn btn-primary mb-3" href="mhs_skripsi_add.php">+ Tambah Data Skripsi</a>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>NIM</th>
+                                                <th>Status</th>
+                                                <th>Nilai</th>
+                                                <th>Lama Studi</th>
+                                                <th>Tanggal Sidang</th>
+                                                <th>Scan</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $query = "SELECT * FROM skripsi WHERE nim = '$nim'";
+                                            $result = $conn->query($query);
+                                            $i = 1;
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<tr>";
+                                                echo "<td>".$i."</td>";
+                                                echo "<td>".$row['nim']."</td>";
+                                                echo "<td>".$row['id_status']."</td>";
+                                                echo "<td>".$row['nilai']."</td>";
+                                                echo "<td>".$row['lama_studi']."</td>";
+                                                echo "<td>".$row['tanggal_sidang']."</td>";
+                                                echo '<td><a href="upload/' .$row['scan'] . '">' .$row
+                                                ['scan'].'</a></td>';
+                                                echo '<td>
+                                                <a class="btn btn-danger btn-sm" href="mhs_skripsi_delete.php?id=' . $row["id"] . '">Hapus</a>
+                                                </td>';
+                                                echo "</tr>";
+                                                $i++;
+                                            }
+                                            ?>
+                                            <!-- <a class="btn btn-warning btn-sm" href="mhs_irs_edit.php?smt='.$row["smt"].'">Edit</a> -->
 
-                <div class="card">
-                <!-- If there is success variable, show message -->
-                    <?php if (isset($success)) : ?>
-                    <?php if ($success) : ?>
-                        <div class="alert alert-success" role="alert">
-                        Berhasil Menambahkan
-                        </div>
-                    <?php else : ?>
-                        <div class="alert alert-danger" role="alert">
-                        <?php echo $error_message ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php endif; ?>
 
-                    <div class="card-header">Masukkan Data Skripsi</div>
-                    <div class="card-body">
-                    <!-- /* TODO definisikan method dan actions */ -->
-                    <form name="daftar" method="POST" action="">
-                        
-                    <div class="row mb-3">
-                    <label for="inputJalur" class="col-sm-2 col-form-label">Status</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="id_status" name="id_status">
-                            <option value="" selected>Pilih Status</option>
-                            <option value="Belum Ambil">Belum Ambil</option>
-                            <option value="Sedang Ambil">Sedang Ambil</option>
-                            <option value="Lulus">Lulus</option>
-                        </select>
-                    </div>
-                    </div>             
-                    <div class="row mb-3">
-                        <label for="inputJalur" class="col-sm-2 col-form-label">Nilai Skripsi</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="nilai" name="nilai">
-                                <option value="" selected disabled>Pilih Nilai</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputJalur" class="col-sm-2 col-form-label">Lama Studi</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="lama_studi" name="lama_studi">
-                                <option value="" selected disabled>Semester</option>
-                                <option value="7">7 Semester</option>
-                                <option value="8">8 Semester</option>
-                                <option value="9">9 Semester</option>
-                                <option value="10">10 Semester</option>
-                                <option value="11">11 Semester</option>
-                                <option value="12">12 Semester</option>
-                                <option value="13">13 Semester</option>
-                                <option value="14">14 Semester</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputJalur" class="col-sm-2 col-form-label">Tanggal Sidang</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" id="tanggal_sidang" name="tanggal_sidang" type="date" method="post" />
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                    <label for="inputNumber" class="col-sm-2 col-form-label">Scan Berita Acara</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="file" id="scan" name="scan">
-                    </div>
-                    </div>
+                                        
+                                    </table>
+                                    <br>
+                                    <?php
 
-                    <br>
-                    <button type="submit" name="submit" id="submit" value="submit" class="btn btn-primary container-fluid">Simpan</button>
-                  </form>
+                                    $result->free();
+                                    $conn->close();
+                                    ?>
+                                    <br><br>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+                        <script>
+                            function deleteData(id) {
+                                var conf = confirm("Are you sure, do you really want to delete Customer?");
+                                if (conf == true) {
+                                    $.ajax({
+                                        url: "delete_post.php",
+                                        type: "POST",
+                                        data: {
+                                            id: id
+                                        },
+                                        success: function(data) {
+                                            $("#delete" + id).hide('slow');
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
+                    </div>
                 </div>
-              </div>
+                <!-- /.container-fluid -->
 
-                    
-
-                    <!-- Page Heading -->
-              <!-- General Form Elements -->
+            </div>
             <!-- End of Main Content -->
 
         </div>
@@ -201,7 +155,7 @@ if (isset($_POST['submit'])) {
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="index.php">Logout</a>
+                    <a class="btn btn-primary" href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
