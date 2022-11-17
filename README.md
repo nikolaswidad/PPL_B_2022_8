@@ -11,3 +11,8 @@ ver2
 -Ketika sudah selesai mengisikan, data akan dimasukkan ke dalam database
 
 -Sebelum itu semua, pengguna harus login menggunakan email dan password, jika belum mengisikan harus daftar terlebih dahulu.
+
+-Terdapat scan foto di dalam pengisian PKL, skripsi, KHS, dan IRS.
+
+-Berisi foto sidang acara
+
