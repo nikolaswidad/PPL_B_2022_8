@@ -56,6 +56,7 @@ $nim = $_SESSION['username'];
                             <th scope="col">Angkatan</th>
                             <th scope="col">Nilai</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Dosen Pembimbing</th>
                             <th scope="col">Scan</th>
                             </tr>
                         </thead>
@@ -72,6 +73,7 @@ $nim = $_SESSION['username'];
                             echo "<td>".$row['angkatan']."</td>";
                             echo "<td>".$row['nilai']."</td>";
                             echo "<td>".$row['id_status']."</td>";
+                            echo "<td>".$row['nip']."</td>";
                             echo '<td><a class="btn btn-info" href="upload/' .$row['scan'] . '">Lihat</a></td>';
                             echo "</tr>";
                             $i++;
