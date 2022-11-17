@@ -912,7 +912,13 @@ INSERT INTO `user` (`id`, `email`, `password`, `user_type`) VALUES
 (54, 'mhs6@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
 (55, 'mhs7@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
 (56, 'mhs8@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
-(57, 'mhs9@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa');
+(57, 'mhs9@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(59, 'mhs10@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(60, 'mhs11@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(61, 'mhs12@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(62, 'mhs13@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(63, 'mhs14@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(64, 'mhs15nihbos@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa');
 
 --
 -- Indexes for dumped tables
