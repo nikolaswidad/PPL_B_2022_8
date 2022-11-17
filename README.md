@@ -16,3 +16,15 @@ ver2
 
 -Berisi foto sidang acara
 
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
