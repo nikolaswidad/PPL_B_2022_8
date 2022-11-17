@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2022 at 07:46 AM
+-- Generation Time: Nov 17, 2022 at 08:26 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -86,7 +86,10 @@ CREATE TABLE `irs` (
 INSERT INTO `irs` (`id`, `nim`, `smt`, `sks`, `scan`, `verif`) VALUES
 (1, 24060120140111, 2, 23, '2T1.pdf', ''),
 (3, 24060120140111, 1, 22, 'PM_03_24060120140139_Features(2,3).pdf', ''),
-(8, 24060120140139, 1, 24, 'Pembahasan UTS PBP 2019-2020.pdf', 'Belum');
+(8, 24060120140139, 1, 24, 'Pembahasan UTS PBP 2019-2020.pdf', 'Belum'),
+(9, 0, 3, 72, '', 'Belum'),
+(10, 0, 5, 92, '', 'Belum'),
+(11, 0, 7, 77, '', 'Belum');
 
 -- --------------------------------------------------------
 
@@ -664,7 +667,10 @@ CREATE TABLE `khs` (
 --
 
 INSERT INTO `khs` (`id`, `nim`, `smt`, `sks`, `sks_kumulatif`, `ip`, `ipk`, `scan`, `verif`) VALUES
-(8, 24060120140139, 1, 24, 24, '3.7', '3.7', 'Pembahasan UTS PBP 2019-2020.pdf', 'Sudah');
+(8, 24060120140139, 1, 24, 24, '3.7', '3.7', 'Pembahasan UTS PBP 2019-2020.pdf', 'Sudah'),
+(9, 0, 3, 22, 72, '3.52', '3.65', '', 'Sudah'),
+(10, 0, 5, 22, 92, '3.56', '3.76', '', 'Sudah'),
+(11, 0, 7, 23, 77, '3.77', '3.88', '', 'Sudah');
 
 -- --------------------------------------------------------
 
@@ -692,9 +698,17 @@ CREATE TABLE `mhs` (
 --
 
 INSERT INTO `mhs` (`id_user`, `nim`, `foto`, `nama`, `angkatan`, `status_mhs`, `nip`, `hp`, `email`, `alamat`, `id_provinsi`, `id_kabupaten`) VALUES
+(52, 12301294012, '', 'Farrel', 2019, 'Aktif', 197601102009122002, 81241249894, 'mhs4@gmail.com', 'Jl. tutul pipt no.4 medan', 21, 2105),
+(56, 24021502150, '', 'Saiful', 2020, 'Meninggal', 198203092006041002, 812489218498, 'mhs8@gmail.com', 'Jl. gedung no.7 singkawang', 62, 6209),
+(55, 240241049949, '', 'Faqih', 2020, 'Lulus', 198903032015042002, 812921898, 'mhs7@gmail.com', 'Jl. undip no.7 temanggung', 14, 1410),
+(50, 240601292594, '', 'Dwicahyo', 2021, 'Cuti', 196511071992031003, 8123293893, 'mhs2@gmail.com', 'Jl, kunci terbang no.5 Surabaya', 19, 1906),
+(57, 240941240948, '', 'Julius', 2017, 'Undur Diri', 197907202003121002, 8214944848, 'mhs9@gmail.com', 'Jl. masker no.3 serang', 13, 1311),
+(54, 2406120521059, '', 'Gybran', 2020, 'Undur Diri', 199112092022041001, 81238129444, 'mhs6@gmail.com', 'Jl. nikol no.9 semarang', 17, 1703),
+(53, 2420412490142, '', 'Reyhan', 2020, 'DO', 197308291998022001, 8134128498, 'mhs5@gmail.com', 'Jl. jujung petar no.3 Padang', 15, 1507),
 (49, 24060120130032, '', 'M Naufal', 2017, 'Cuti', 198203092006041002, 8347288373, 'naufal@gmail.com', 'Jalan Sirsak', 36, 3673),
 (47, 24060120140111, '', 'Sabdiel Tarigan', 2021, 'Cuti', 198106202015041002, 836324353, 'sabdil@gmail.com', 'Jalan Udin', 52, 5207),
-(48, 24060120140139, '', 'Nikolas Widad Arrauf H', 2020, 'Aktif', 198302032006041002, 81274891467, 'mhs1@gmail.com', 'Jalan Padi 1', 33, 3374);
+(48, 24060120140139, '', 'Nikolas Widad Arrauf H', 2020, 'Aktif', 198302032006041002, 81274891467, 'mhs1@gmail.com', 'Jalan Padi 1', 33, 3374),
+(51, 242041249012942, '', 'Naufal', 2020, 'Mangkir', 197007051997021001, 8123821983, 'mhs3@gmail.com', 'Jl. oiring jatuh no.4 Jayapura', 15, 1572);
 
 -- --------------------------------------------------------
 
@@ -717,7 +731,10 @@ CREATE TABLE `pkl` (
 
 INSERT INTO `pkl` (`id`, `nim`, `id_status`, `nilai`, `scan`, `verif`) VALUES
 (10, 24060120140111, 'Sedang Ambil', '', '', ''),
-(11, 24060120140139, 'Lulus', 'A', 'Pembahasan UTS PBP 2019-2020.pdf', '');
+(11, 24060120140139, 'Lulus', 'A', 'Pembahasan UTS PBP 2019-2020.pdf', ''),
+(12, 0, 'Belum Ambil', 'A', '', 'Sudah'),
+(13, 0, 'Sedang Ambil', 'B', '', 'Sudah'),
+(14, 0, 'Lulus', 'C', '', 'Sudah');
 
 -- --------------------------------------------------------
 
@@ -793,7 +810,10 @@ CREATE TABLE `skripsi` (
 
 INSERT INTO `skripsi` (`id`, `nim`, `id_status`, `nilai`, `lama_studi`, `tanggal_sidang`, `scan`, `verif`) VALUES
 (25, 24060120140139, 'Lulus', 'A', 7, '2022-11-17', 'Pembahasan UTS PBP 2019-2020.pdf', ''),
-(27, 24060120140111, 'Sedang Ambil', '', 0, '0000-00-00', '', '');
+(27, 24060120140111, 'Sedang Ambil', '', 0, '0000-00-00', '', ''),
+(28, 0, 'Belum Ambil', 'A', 7, '2022-11-18', '', 'Sudah'),
+(29, 0, 'Sedang Ambil', 'B', 5, '2022-12-01', '', 'Sudah'),
+(30, 0, 'Lulus', 'C', 9, '2022-12-10', '', 'Sudah');
 
 -- --------------------------------------------------------
 
@@ -884,7 +904,15 @@ INSERT INTO `user` (`id`, `email`, `password`, `user_type`) VALUES
 (46, 'departemen@gmail.com', '202cb962ac59075b964b07152d234b70', 'Departemen'),
 (47, 'sabdil@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
 (48, 'mhs1@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
-(49, 'naufal@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa');
+(49, 'naufal@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(50, 'mhs2@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(51, 'mhs3@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(52, 'mhs4@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(53, 'mhs5@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(54, 'mhs6@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(55, 'mhs7@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(56, 'mhs8@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa'),
+(57, 'mhs9@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa');
 
 --
 -- Indexes for dumped tables
@@ -977,7 +1005,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `irs`
 --
 ALTER TABLE `irs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `jalur`
@@ -989,19 +1017,19 @@ ALTER TABLE `jalur`
 -- AUTO_INCREMENT for table `khs`
 --
 ALTER TABLE `khs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pkl`
 --
 ALTER TABLE `pkl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `skripsi`
 --
 ALTER TABLE `skripsi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -1013,7 +1041,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- Constraints for dumped tables
