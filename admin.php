@@ -77,53 +77,59 @@ $email = $_SESSION['username'];
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
+            
             <!-- Main Content -->
             <div id="content">
+                <?php include('header.html')?>
+                
+                <div class="container-fluid">
 
-                <!-- Topbar -->
-                <!-- End of Topbar -->
+                <!-- Page Heading -->
+                <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                    For more information about DataTables, please visit the <a target="_blank"
+                        href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
-                <!-- Begin Page Content -->
-                <div class="card">
-                    <!-- If there is success variable, show message -->
-                    <?php include('header.html')?>
-                    
-                    <div class="card-header">Active User Data</div>
-                    <div class="card-body">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Tipe</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $query = "SELECT * FROM user";
-                        $result = mysqli_query($conn, $query);
-                        $i = 1;
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<th>".$i."</th>";
-                            echo "<td>".$row['email']."</td>";
-                            echo "<td>".$row['user_type']."</td>";
-                            echo "</tr>";
-                            $i++;
-                        }
-                        echo '</tbody>';
-                        echo '</table>';
-    
-                        $result->free();
-                        ?>
-                        </tbody>
-                        </table> 
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">User Active Data</h6>
                     </div>
-
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Tipe</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <?php
+                                        $query = "SELECT * FROM user";
+                                        $result = mysqli_query($conn, $query);
+                                        $i = 1;
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<tr>";
+                                            echo "<td>".$i."</td>";
+                                            echo "<td>".$row['email']."</td>";
+                                            echo "<td>".$row['user_type']."</td>";
+                                            echo "</tr>";
+                                            $i++;
+                                        }
+                                        echo '</tbody>';
+                                        echo '</table>';
+                    
+                                        $result->free();
+                                        ?>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-
-              <!-- General Form Elements -->
                 <!-- /.container-fluid -->
 
             </div>
