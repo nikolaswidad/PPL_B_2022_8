@@ -37,87 +37,75 @@ $nim = $_SESSION['nim'];
             <!-- Main Content -->
             <div id="content">
                 <?php include('header.html'); ?>
+                <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <div class="s">
-                        <div class="container">
-                            <div class="card mt-4">
-                                <div class="card-header">DATA IRS</div>
-                                <div class="card-body">
-                                    <br>
-                                    <a class="btn btn-primary mb-3" href="mhs_irs_add.php">+ Tambah Data IRS</a>
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>NIM</th>
-                                                <th>Semester</th>
-                                                <th>Beban SKS</th>
-                                                <th>Scan</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                                            $query = "SELECT * FROM irs WHERE nim = '$nim' ORDER BY smt ";
-                                            $result = $conn->query($query);
-                                            $i = 1;
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "<tr>";
-                                                echo "<td>".$i."</td>";
-                                                echo "<td>".$row['nim']."</td>";
-                                                echo "<td>".$row['smt']."</td>";
-                                                echo "<td>".$row['sks']."</td>";
-                                                echo '<td><a href="upload/' .$row['scan'] . '">' .$row
-                                                ['scan'].'</a></td>';
-                                                echo '<td>
-                                                <a class="btn btn-danger btn-sm" href="mhs_irs_delete.php?id=' . $row["smt"] . '">Hapus</a>
-                                                </td>';
-                                                echo "</tr>";
-                                                $i++;
-                                            }
-                                            foreach($conn->query("SELECT SUM(sks) FROM irs WHERE nim = '$nim'") as $sum_sks);
-                                            ?>
-                                            <!-- <a class="btn btn-warning btn-sm" href="mhs_irs_edit.php?smt='.$row["smt"].'">Edit</a> -->
 
-
-                                        
-                                    </table>
-                                    <br>
-                                    <?php echo 'Jumlah Data = ' . $result->num_rows; ?>
-                                    <br>
-                                    <?php
-                                    echo 'SKS Kumulatif = '.$sum_sks['SUM(sks)'];
-
-                                    $result->free();
-                                    $conn->close();
-                                    ?>
-                                    <br><br>
-                                    </table>
-                                </div>
+                <!-- Page Heading -->
+                <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                    For more information about DataTables, please visit the <a target="_blank"
+                        href="https://datatables.net">official DataTables documentation</a>.</p> -->
+                        
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Data IRS Mahasiswa</h6>
                             </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <a class="btn btn-primary mb-3" href="mhs_irs_add.php">+ Tambah Data IRS</a>
+                                        <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>NIM</th>
+                                        <th>Semester</th>
+                                        <th>Beban SKS</th>
+                                        <th>Scan</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $query = "SELECT * FROM irs WHERE nim = '$nim' ORDER BY smt ";
+                                    $result = $conn->query($query);
+                                    $i = 1;
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>".$i."</td>";
+                                        echo "<td>".$row['nim']."</td>";
+                                        echo "<td>".$row['smt']."</td>";
+                                        echo "<td>".$row['sks']."</td>";
+                                        echo '<td><a href="upload/' .$row['scan'] . '">' .$row
+                                        ['scan'].'</a></td>';
+                                        echo '<td>
+                                        <a class="btn btn-danger btn-sm" href="mhs_irs_delete.php?id=' . $row["smt"] . '">Hapus</a>
+                                        </td>';
+                                        echo "</tr>";
+                                        $i++;
+                                    }
+                                    foreach($conn->query("SELECT SUM(sks) FROM irs WHERE nim = '$nim'") as $sum_sks);
+                                    ?>
+                                    <!-- <a class="btn btn-warning btn-sm" href="mhs_irs_edit.php?smt='.$row["smt"].'">Edit</a> -->
+                
+                                </tbody>
+                            </table>
+                            <tfoot>
+                                <br>
+                                <?php echo 'Jumlah Data = ' . $result->num_rows; ?>
+                                <br>
+                                <?php
+                                echo 'SKS Kumulatif = '.$sum_sks['SUM(sks)'];
+                
+                                $result->free();
+                                $conn->close();
+                                ?>
+                                <br><br>
+                            </tfoot>
                         </div>
-
-                        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-                        <script>
-                            function deleteData(id) {
-                                var conf = confirm("Are you sure, do you really want to delete Customer?");
-                                if (conf == true) {
-                                    $.ajax({
-                                        url: "delete_post.php",
-                                        type: "POST",
-                                        data: {
-                                            id: id
-                                        },
-                                        success: function(data) {
-                                            $("#delete" + id).hide('slow');
-                                        }
-                                    });
-                                }
-                            }
-                        </script>
                     </div>
                 </div>
+
                 <!-- /.container-fluid -->
 
             </div>
