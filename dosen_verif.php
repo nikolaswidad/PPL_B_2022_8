@@ -72,14 +72,14 @@ $nim = $_SESSION['username'];
 
                         if(isset($_GET['keyword'])){
                             $cari = $_GET['cari_jenis_barang'];
-                            $data = mysqli_query($conn, "SELECT * FROM mhs WHERE nama LIKE '%".$cari."%'");
+                            $data = mysqli_query($conn, "SELECT * FROM mhs WHERE nama LIKE '%".$Cari."%'");
                         }else{
                             $data = mysqli_query($conn, "SELECT * FROM mhs");
                         }
                         $no = 1;
                         while ($row = mysqli_fetch_array($data)) {
                             echo "<tr>";
-                            echo "<th>".$no++."</th>";
+                            echo "<th>".$no."</th>";
                             echo "<td>".$row['nama']."</td>";
                             echo "<td>".$row['nim']."</td>";
                             echo "<td>".$row['angkatan']."</td>";
@@ -91,7 +91,7 @@ $nim = $_SESSION['username'];
                         echo '</tbody>';
                         echo '</table>';
     
-                        $result->free();
+                        $data->free();
                         $conn->close();
 
                         
