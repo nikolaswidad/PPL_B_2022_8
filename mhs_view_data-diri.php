@@ -16,9 +16,12 @@ if ($result->num_rows > 0) {
     $angkatan = $row['angkatan'];
     $alamat = $row['alamat'];
     $hp = $row['hp'];
+    $nip = $row['nip'];
+    $provinsi = $row['id_provinsi'];
+    $kabupaten = $row['id_kabupaten'];
+
   }
 }
-
 
 ?>
 
@@ -80,29 +83,20 @@ if ($result->num_rows > 0) {
                     
                     <div class="row mb-3">
                       <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
-                      <div class="col-sm-10">                        
-                        <input type="text" name="nama" id="nama" class="form-control" value="<?php echo $nama; ?>" readonly>
-                        <div id="error_name" style="color: red;">
-                          <?php if (isset($error_nama))  echo $error_nama ?>
-                        </div>
+                      <div class="col-sm-10">
+                        <p class="form-control"><?php echo $nama; ?></p>                        
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="nim" class="col-sm-2 col-form-label">NIM</label>
                       <div class="col-sm-10">                        
-                        <input type="text" name="nim" id="nim" class="form-control" value="<?php echo $nim; ?>" readonly>
-                        <!-- <div id="error_name" style="color: red;">
-                          <?php if (isset($error_nim))  echo $error_nim ?>
-                        </div> -->
-                      </div>
+                        <p class="form-control"><?php echo $nim; ?></p>      
+                      </div>            
                     </div>
                     <div class="row mb-3">
                       <label for="angkatan" class="col-sm-2 col-form-label">Angkatan</label>
-                      <div class="col-sm-10">  
-                        <input type="text" name="angkatan" id="angkatan" class="form-control" value="<?php echo $angkatan; ?>" readonly>
-                        <div id="error_name" style="color: red;">
-                          <?php if (isset($error_angkatan))  echo $error_angkatan ?>
-                        </div>
+                      <div class="col-sm-10">
+                        <p class="form-control"><?php echo $angkatan; ?></p>       
                       </div>
                     </div>
                     
@@ -110,44 +104,49 @@ if ($result->num_rows > 0) {
                     <div class="row mb-3">
                       <label for="status_mhs" class="col-sm-2 col-form-label">Status Mahasiswa</label>
                       <div class="col-sm-10">  
-                        <input type="text" name="status_mhs" id="status_mhs" class="form-control" value="<?php echo $status_mhs; ?>" readonly>
-                        <div id="error_status_mhs" style="color: red;">
-                          <?php if (isset($error_status_mhs))  echo $error_status_mhs ?>
-                        </div>
+                        <p class="form-control"><?php echo $status_mhs; ?></p> 
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="nip" class="col-sm-2 col-form-label">Dosen Pembimbing</label>
+                      <div class="col-sm-10">  
+                        <p class="form-control"><?php echo $nip; ?></p> 
                       </div>
                     </div>
 
                       
-                      <div class="row mb-3">
-                        <label for="hp" class="col-sm-2 col-form-label">Nomor HP</label>
-                        <div class="col-sm-10">    
-                          <input type="text" name="hp" id="hp" class="form-control" value="0<?php echo $hp; ?>" readonly>
-                          <div id="error_name" style="color: red;">
-                            <?php if (isset($error_hp))  echo $error_hp ?>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                      <label for="email" class="col-sm-2 col-form-label">Email</label>
-                      <div class="col-sm-10">                        
-                        <input type="text" name="email" id="email" class="form-control" value="<?php if (isset($email)) echo $email; ?>" readonly>
-                        <!-- <div id="error_name" style="color: red;">
-                          <?php if (isset($error_email))  echo $error_email ?>
-                        </div> -->
+                    <div class="row mb-3">
+                      <label for="hp" class="col-sm-2 col-form-label">Nomor HP</label>
+                      <div class="col-sm-10">    
+                        <p class="form-control"><?php echo $hp; ?></p>  
                       </div>
                     </div>
-                      <div class="row mb-3">
-                        <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-                        <div class="col-sm-10">    
-                          <textarea name="alamat" id="alamat" rows="3" class="form-control" readonly><?php echo $alamat; ?></textarea>
-                          <div id="error_alamat" style="color: red;">
-                            <?php if (isset($error_alamat))  echo $error_alamat ?>
-                          </div>
+                    <div class="row mb-3">
+                      <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">                        
+                          <p class="form-control"><?php echo $email; ?></p>  
                         </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                      <div class="col-sm-10">    
+                        <p class="form-control"><?php echo $alamat; ?></p>  
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="alamat" class="col-sm-2 col-form-label">Provinsi</label>
+                      <div class="col-sm-10">    
+                        <p class="form-control"><?php echo $provinsi; ?></p>  
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="alamat" class="col-sm-2 col-form-label">Kota/Kabupaten</label>
+                      <div class="col-sm-10">    
+                        <p class="form-control"><?php echo $kabupaten; ?></p>  
                       </div>
                     </div>
                     <br>
-                    <a href="mhs_data-diri.php" class="btn btn-primary container-fluid">Belum Input Data</a>
+                    <a href="mhs_data-diri.php" class="btn btn-primary container-fluid">Update Data</a>
                   </form>
                 </div>
               </div>
