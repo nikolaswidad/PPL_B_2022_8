@@ -41,7 +41,7 @@ $nim = $_SESSION['username'];
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="departemen_datamhs.php">
+            <a class="nav-link" href="admin.php">
                 <span class="icon">
                     <ion-icon name="person"></ion-icon>
                 </span>
