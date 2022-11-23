@@ -70,7 +70,7 @@ $nim = $_SESSION['username'];
                                 <tbody>
                                     <?php
                                     $query = "SELECT m.nama AS nama, m.nim AS nim, angkatan, nilai, id_status, d.nama AS dosen, scan
-                                    FROM pkl as s, mhs as m, dosen as d WHERE s.nim = m.nim AND d.nip = m.nip" ;
+                                    FROM pkl as s, mhs as m, dosen as d WHERE s.nim = m.nim AND d.nip = m.nip AND verif = 'Sudah'" ;
                                     $result = $conn->query($query);
                 
                 

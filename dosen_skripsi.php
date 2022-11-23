@@ -67,7 +67,7 @@ $nim = $_SESSION['username'];
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query = "SELECT * FROM skripsi as s INNER JOIN mhs as m ON s.nim = m.nim ";
+                                    $query = "SELECT * FROM skripsi as s INNER JOIN mhs as m ON s.nim = m.nim WHERE s.verif = 'Sudah'";
                                     $result = $conn->query($query);
                                     $i = 1;
                                     while ($row = $result->fetch_assoc()) {
