@@ -5,118 +5,154 @@ $email = $_SESSION['username'];
 $id_user = $_SESSION['user_id'];
 $nim = $_SESSION['nim'];
 
+$select = 'SELECT * FROM mhs WHERE nim="' . $nim . '"';
+
+$ress = $conn->query($select);
+
+if ($ress->num_rows > 0) {
+  while ($row = $ress->fetch_assoc()) {
+    $nama = $row['nama'];
+    // $id_status = $row['id_status'];
+    $angkatan = $row['angkatan'];
+    $alamat = $row['alamat'];
+    // $provinsi = $row['provinsi'];
+    // $kota = $row['kota'];
+    $hp = $row['hp'];
+    $foto = $row['foto'];
+  }
+}
+
 
 
 // Check if already submit the form
 if (isset($_POST['submit'])) {
   $submit = true;
-  // Check if nama is empty
-  if (empty($_POST['nama'])) {
-    $error_nama = "Nama tidak boleh kosong";
-    $submit = false;
-  } else {
-    $nama = $conn->real_escape_string(trim($_POST['nama']));
-  }
 
-  // Check if nim is empty
-  if (empty($_POST['nim'])) {
-    $error_nim = "NIM tidak boleh kosong";
-    $submit = false;
-  } else {
-    $nim = $conn->real_escape_string(trim($_POST['nim']));
-  }
+  $nama = $conn->real_escape_string(trim($_POST['nama']));
+  $nim = $conn->real_escape_string(trim($_POST['nim']));
+  $angkatan = $conn->real_escape_string(trim($_POST['angkatan']));
+  $status_mhs = $conn->real_escape_string(trim($_POST['status_mhs']));
+  $nip = $conn->real_escape_string(trim($_POST['nip']));
+  $hp = $conn->real_escape_string(trim($_POST['hp']));
+  $email = $conn->real_escape_string(trim($_POST['email']));
+  $alamat = $conn->real_escape_string(trim($_POST['alamat']));
+  $provinsi = $conn->real_escape_string(trim($_POST['provinsi']));
+  $kabupaten = $conn->real_escape_string(trim($_POST['kabupaten']));
 
-  // Check if angkatan is empty
-  if (empty($_POST['angkatan'])) {
-    $error_angkatan = "Tahun Angkatan tidak boleh kosong";
-    $submit = false;
-  } else {
-    $angkatan = $conn->real_escape_string(trim($_POST['angkatan']));
-  }
-  // Check if status_mhs is empty
-  if (empty($_POST['status_mhs'])) {
-    $error_status_mhs = "Wajib isi, tidak boleh kosong";
-    $submit = false;
-  } else {
-    $status_mhs = $conn->real_escape_string(trim($_POST['status_mhs']));
-  }
+  // // Check if nama is empty
+  // if (empty($_POST['nama'])) {
+  //   $error_nama = "Nama tidak boleh kosong";
+  //   $submit = false;
+  // } else {
+  //   $nama = $conn->real_escape_string(trim($_POST['nama']));
+  // }
 
-  // Check if nip is empty
-  if (empty($_POST['nip'])) {
-    $error_nip = "Dosen Wali tidak boleh kosong";
-    $submit = false;
-  } else {
-    $nip = $conn->real_escape_string(trim($_POST['nip']));
-  }
+  // // Check if nim is empty
+  // if (empty($_POST['nim'])) {
+  //   $error_nim = "NIM tidak boleh kosong";
+  //   $submit = false;
+  // } else {
+  //   $nim = $conn->real_escape_string(trim($_POST['nim']));
+  // }
 
-    // Check if hp is empty
-    if (empty($_POST['hp'])) {
-      $error_hp = "Nomor HP tidak boleh kosong";
-      $submit = false;
-    } else {
-      $hp = $conn->real_escape_string(trim($_POST['hp']));
-    }
+  // // Check if angkatan is empty
+  // if (empty($_POST['angkatan'])) {
+  //   $error_angkatan = "Tahun Angkatan tidak boleh kosong";
+  //   $submit = false;
+  // } else {
+  //   $angkatan = $conn->real_escape_string(trim($_POST['angkatan']));
+  // }
+  // // Check if status_mhs is empty
+  // if (empty($_POST['status_mhs'])) {
+  //   $error_status_mhs = "Wajib isi, tidak boleh kosong";
+  //   $submit = false;
+  // } else {
+  //   $status_mhs = $conn->real_escape_string(trim($_POST['status_mhs']));
+  // }
 
-  // Check if email is empty
-  if (empty($_POST['email'])) {
-    $error_email = "Email tidak boleh kosong";
-    $submit = false;
-  } else {
-    // Check email is valid
-    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-      $error_email = "Email tidak valid";
-      $submit = false;
-    } else {
-      $email = $conn->real_escape_string(trim($_POST['email']));
-      // Check if email is already registered
-      $query = "SELECT * FROM mhs WHERE email = '$email'";
-      $result = $conn->query($query);
-      if ($result->num_rows > 0) {
-        $error_email = "Email sudah terdaftar";
-        $submit = false;
-      }
-    }
-  }
+  // // Check if nip is empty
+  // if (empty($_POST['nip'])) {
+  //   $error_nip = "Dosen Wali tidak boleh kosong";
+  //   $submit = false;
+  // } else {
+  //   $nip = $conn->real_escape_string(trim($_POST['nip']));
+  // }
 
-  // Check if alamat is empty
-  if (empty($_POST['alamat'])) {
-    $error_alamat = "Alamat tidak boleh kosong";
-    $submit = false;
-  } else {
-    $alamat = $conn->real_escape_string(trim($_POST['alamat']));
-  }
+  //   // Check if hp is empty
+  //   if (empty($_POST['hp'])) {
+  //     $error_hp = "Nomor HP tidak boleh kosong";
+  //     $submit = false;
+  //   } else {
+  //     $hp = $conn->real_escape_string(trim($_POST['hp']));
+  //   }
 
-  // Check if provinsi is empty
-  if (empty($_POST['provinsi'])) {
-    $error_provinsi = "Provinsi tidak boleh kosong";
-    $submit = false;
-  } else {
-    $provinsi = $conn->real_escape_string(trim($_POST['provinsi']));
-  }
+  // // Check if email is empty
+  // if (empty($_POST['email'])) {
+  //   $error_email = "Email tidak boleh kosong";
+  //   $submit = false;
+  // } else {
+  //   // Check email is valid
+  //   if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+  //     $error_email = "Email tidak valid";
+  //     $submit = false;
+  //   } else {
+  //     $email = $conn->real_escape_string(trim($_POST['email']));
+  //     // Check if email is already registered
+  //     $query = "SELECT * FROM mhs WHERE email = '$email'";
+  //     $result = $conn->query($query);
+  //     if ($result->num_rows > 0) {
+  //       $error_email = "Email sudah terdaftar";
+  //       $submit = false;
+  //     }
+  //   }
+  // }
 
-  // Check if kabupaten is empty
-  if (empty($_POST['kabupaten'])) {
-    $error_kabupaten = "Kabupaten tidak boleh kosong";
-    $submit = false;
-  } else {
-    $kabupaten = $conn->real_escape_string(trim($_POST['kabupaten']));
-  }
+  // // Check if alamat is empty
+  // if (empty($_POST['alamat'])) {
+  //   $error_alamat = "Alamat tidak boleh kosong";
+  //   $submit = false;
+  // } else {
+  //   $alamat = $conn->real_escape_string(trim($_POST['alamat']));
+  // }
+
+  // // Check if provinsi is empty
+  // if (empty($_POST['provinsi'])) {
+  //   $error_provinsi = "Provinsi tidak boleh kosong";
+  //   $submit = false;
+  // } else {
+  //   $provinsi = $conn->real_escape_string(trim($_POST['provinsi']));
+  // }
+
+  // // Check if kabupaten is empty
+  // if (empty($_POST['kabupaten'])) {
+  //   $error_kabupaten = "Kabupaten tidak boleh kosong";
+  //   $submit = false;
+  // } else {
+  //   $kabupaten = $conn->real_escape_string(trim($_POST['kabupaten']));
+  // }
 
   // If submit is true, insert the data
   if ($submit) {
 
     // Membuat data mahasiswa yang sudah tersambung ke user_id
-    $query = "INSERT INTO mhs (id_user, foto, nama, nim, angkatan, status_mhs, nip, hp, email, alamat, id_provinsi, id_kabupaten) VALUES ('$id_user' ,'$namefile', '$nama', '$nim', '$angkatan', '$status_mhs', '$nip', '$hp', '$email', '$alamat', $provinsi, $kabupaten)";
+    // $query = "INSERT INTO mhs (id_user, foto, nama, nim, angkatan, status_mhs, nip, hp, email, alamat, id_provinsi, id_kabupaten) VALUES ('$id_user' ,'$namefile', '$nama', '$nim', '$angkatan', '$status_mhs', '$nip', '$hp', '$email', '$alamat', $provinsi, $kabupaten)";
+    $query = "UPDATE mhs SET id_user = '$id_user', nama = '$nama', angkatan = '$angkatan',
+     status_mhs = '$status_mhs', nip = '$nip', hp = '$hp', email = '$email', alamat = '$alamat', id_provinsi = '$provinsi', id_kabupaten = '$kabupaten' WHERE nim = '$nim'  ";
     
     $result = $conn->query($query);
 
-    if (!$result) {
-      $success = false;
-      $error_message = "Data Sudah Ada";
-    } else {
+    if ($result) {
       $success = true;
       header('location: mhs_view_data-diri.php');
     }
+
+    // if (!$result) {
+    //   $success = false;
+    //   $error_message = "Data Sudah Ada";
+    // } else {
+    //   $success = true;
+    //   header('location: mhs_view_data-diri.php');
+    // }
 
     $conn->close();
   }

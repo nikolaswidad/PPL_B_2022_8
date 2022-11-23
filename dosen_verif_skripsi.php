@@ -88,6 +88,7 @@ $nim = $_SESSION['username'];
                             echo "<td>".$row['verif']."</td>";
                             echo '<td><a class="btn btn-info" href="#">Lihat</a></td>';
                             echo '<td><a class="btn btn-warning" href="verif_skripsi.php?nim='.$row["nim"].'">Verif</a></td>';
+                            echo '<td><a class="btn btn-danger" href="cancel_verif_skripsi.php?nim='.$row["nim"].'">Cancel</a></td>';
                             echo "</tr>";
                             $no++;
                             
