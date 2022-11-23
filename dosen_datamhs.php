@@ -70,7 +70,7 @@ $nim = $_SESSION['username'];
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <i class="fas fa-user fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@ $nim = $_SESSION['username'];
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <i class="fas fa-toggle-on fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@ $nim = $_SESSION['username'];
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@ $nim = $_SESSION['username'];
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <i class="fas fa-power-off fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@ $nim = $_SESSION['username'];
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <i class="fas fa-pause fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +234,7 @@ $nim = $_SESSION['username'];
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-ghost fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -262,7 +262,8 @@ $nim = $_SESSION['username'];
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            <i class="fas fa-sign-out-alt fa-2x text-gray-300"></i>
+                                            <i class="fa-solid fa-"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -290,7 +291,7 @@ $nim = $_SESSION['username'];
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            <i class="fas fa-star-of-life fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
