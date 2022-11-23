@@ -35,19 +35,13 @@ $nim = $_SESSION['username'];
 
             <!-- Main Content -->
             <div id="content">
-            <?php include('header.html')?>
+            <?php include('header.php')?>
             
             <div class="card">
                     <!-- If there is success variable, show message -->
                     
                     <div class="card-header">Data Mahasiswa</div>
-                    <div class="form-group row mt-2">
-                    <div class="col-sm-10">
-                      <input type="text" name="keyword" class="form-control" id="">
-                    </div>
-                    <input type="submit" value="Cari">
-                  </div>
-                
+                    
             <br>
                     <div class="card-body">
                     <table class="table table-striped table-hover">
@@ -70,16 +64,13 @@ $nim = $_SESSION['username'];
 
                         
 
-                        
-                    
-
-                        if(isset($_GET['keyword'])){
-                            $cari = $_GET['cari_jenis_barang'];
-                            $data = mysqli_query($conn, "SELECT * FROM mhs INNER JOIN pkl ON pkl.nim = mhs.nim WHERE mhs.nama LIKE '%".$Cari."%'");
-                        }else{
-                            $data = mysqli_query($conn, "SELECT * FROM mhs INNER JOIN pkl ON pkl.nim = mhs.nim");
-                        }
                         $no = 1;
+                        $data = mysqli_query($conn, "SELECT * FROM mhs INNER JOIN pkl ON pkl.nim = mhs.nim");
+                        if(isset($_GET['cari'])){                        
+                            $data = mysqli_query($conn, "SELECT * FROM mhs INNER JOIN pkl ON pkl.nim = mhs.nim WHERE mhs.nama OR nim OR LIKE '%".
+                                $_GET['cari']."%'");
+                        }
+                    
                         while ($row = mysqli_fetch_array($data)) {
                             echo "<tr>";
                             echo "<th>".$no."</th>";
