@@ -41,7 +41,7 @@ $nim = $_SESSION['username'];
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="departemen_datamhs.php">
+            <a class="nav-link" href="admin.php">
                 <span class="icon">
                     <ion-icon name="person"></ion-icon>
                 </span>
@@ -92,7 +92,7 @@ $nim = $_SESSION['username'];
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Data User Active</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">User Active Data</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -107,7 +107,7 @@ $nim = $_SESSION['username'];
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query = "SELECT * FROM user";
+                                    $query = "SELECT * FROM user ";
                                     $result = $conn->query($query);
                                     $i = 1;
                                     while ($row = $result->fetch_assoc()) {
