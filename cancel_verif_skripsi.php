@@ -5,7 +5,7 @@ require_once('config.php');
 
 if (isset($_GET['nim'])) {
     $nim = $_GET['nim'];
-    $query = "UPDATE skripsi SET verif = 'Sudah' WHERE nim = '$nim'";
+    $query = "UPDATE skripsi SET verif = 'Belum' WHERE nim = '$nim'";
     
     $result = $conn->query($query);
     if (!$result) {
