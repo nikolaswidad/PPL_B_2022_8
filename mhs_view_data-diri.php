@@ -20,8 +20,19 @@ if ($result->num_rows > 0) {
     $nip = $row['nip'];
     $provinsi = $row['nama_provinsi'];
     $kabupaten = $row['nama_kabupaten'];
-
+    $error = "";
   }
+} else {
+  $nama = "";
+  $status_mhs = "";
+  $nim = "";
+  $angkatan = "";
+  $alamat = "";
+  $hp = "";
+  $nip = "";
+  $provinsi = "";
+  $kabupaten = "";
+  $error = "Belum Mengisi Data";
 }
 
 ?>
@@ -78,6 +89,7 @@ if ($result->num_rows > 0) {
                 <?php endif; ?>
 
                 <div class="card-header">Data Diri</div>
+                <div class="card-header"><?php echo $error;?></div>
                 <div class="card-body">
                   <!-- /* TODO definisikan method dan actions */ -->
                   <form name="daftar" method="POST" action="" >
