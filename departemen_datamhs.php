@@ -314,6 +314,7 @@ $nim = $_SESSION['username'];
                                         <th scope="col">NIM</th>
                                         <th scope="col">Angkatan</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Detail Info</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -328,6 +329,7 @@ $nim = $_SESSION['username'];
                                             echo "<td>".$row['nim']."</td>";
                                             echo "<td>".$row['angkatan']."</td>";
                                             echo "<td>".$row['status_mhs']."</td>";
+                                            echo '<td><a class="btn btn-info" href="departemen_view_data-diri.php?nim='.$row['nim'].'">Lihat</a></td>';
                                             echo "</tr>";
                                             $i++;
                                         }
