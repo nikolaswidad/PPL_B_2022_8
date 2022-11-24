@@ -109,7 +109,7 @@ if ($result->num_rows > 0) {
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="nip" class="col-sm-2 col-form-label">Dosen Pembimbing</label>
+                      <label for="nip" class="col-sm-2 col-form-label">Dosen Wali</label>
                       <div class="col-sm-10">  
                         <p class="form-control"><?php echo $nip; ?></p> 
                       </div>
