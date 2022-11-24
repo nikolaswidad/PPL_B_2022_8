@@ -166,7 +166,7 @@ $nim = $_SESSION['username'];
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-power-off fa-2x text-gray-300"></i>
+                                            <i class="fas fa-bars fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
