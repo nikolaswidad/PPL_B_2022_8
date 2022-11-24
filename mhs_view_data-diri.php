@@ -5,8 +5,9 @@ $email = $_SESSION['username'];
 $id_user = $_SESSION['user_id'];
 $nim = $_SESSION['nim'];
 
-$select = "SELECT mhs.nama AS nama, mhs.status_mhs, mhs.nim, mhs.angkatan, mhs.alamat, mhs.hp, mhs.nip, provinsi.nama AS nama_provinsi, kabupaten.nama AS nama_kabupaten
-          FROM mhs INNER JOIN provinsi ON mhs.id_provinsi = provinsi.id INNER JOIN kabupaten ON mhs.id_kabupaten = kabupaten.id WHERE id_user = '$id_user'";
+$select = "SELECT mhs.nama AS nama, mhs.status_mhs, mhs.nim, mhs.angkatan, mhs.alamat, mhs.hp, dosen.nama AS nama_dosen, provinsi.nama AS nama_provinsi, kabupaten.nama AS nama_kabupaten
+          FROM mhs INNER JOIN provinsi ON mhs.id_provinsi = provinsi.id INNER JOIN kabupaten ON mhs.id_kabupaten = kabupaten.id INNER JOIN dosen ON mhs.nip = dosen.nip
+          WHERE nim = '$nim'";
 $result = $conn->query($select);
 
 if ($result->num_rows > 0) {
@@ -17,7 +18,7 @@ if ($result->num_rows > 0) {
     $angkatan = $row['angkatan'];
     $alamat = $row['alamat'];
     $hp = $row['hp'];
-    $nip = $row['nip'];
+    $dosen = $row['nama_dosen'];
     $provinsi = $row['nama_provinsi'];
     $kabupaten = $row['nama_kabupaten'];
     $error = "";
@@ -29,7 +30,7 @@ if ($result->num_rows > 0) {
   $angkatan = "";
   $alamat = "";
   $hp = "";
-  $nip = "";
+  $dosen = "";
   $provinsi = "";
   $kabupaten = "";
   $error = "Belum Mengisi Data";
@@ -123,7 +124,7 @@ if ($result->num_rows > 0) {
                     <div class="row mb-3">
                       <label for="nip" class="col-sm-2 col-form-label">Dosen Wali</label>
                       <div class="col-sm-10">  
-                        <p class="form-control"><?php echo $nip; ?></p> 
+                        <p class="form-control"><?php echo $dosen; ?></p> 
                       </div>
                     </div>
 
