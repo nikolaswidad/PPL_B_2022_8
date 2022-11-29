@@ -62,6 +62,7 @@ $nim = $_SESSION['nim'];
                                         <th>Semester</th>
                                         <th>Beban SKS</th>
                                         <th>Scan</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -78,6 +79,7 @@ $nim = $_SESSION['nim'];
                                         echo "<td>".$row['sks']."</td>";
                                         echo '<td><a href="upload/' .$row['scan'] . '">' .$row
                                         ['scan'].'</a></td>';
+                                        echo "<td>".$row['verif']."</td>";
                                         echo '<td>
                                         <a class="btn btn-danger btn-sm" href="mhs_irs_delete.php?id=' . $row["smt"] . '">Hapus</a>
                                         </td>';
