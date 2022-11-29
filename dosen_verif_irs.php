@@ -51,6 +51,8 @@ $nim = $_SESSION['username'];
                                             <th scope="col">No</th>
                                             <th scope="col">Nama</th>
                                             <th scope="col">NIM</th>
+                                            <th scope="col">Semester</th>
+                                            <th scope="col">SKS</th>
                                             <th scope="col">Angkatan</th>
                                             <th scope="col">Verif</th>
                                             <th scope="col">Scan</th>
@@ -59,18 +61,16 @@ $nim = $_SESSION['username'];
                                     </thead>
                                     <tbody>
                                     <?php
-                                        if(isset($_GET['keyword'])){
-                                            $cari = $_GET['cari_jenis_barang'];
-                                            $data = mysqli_query($conn, "SELECT * FROM mhs INNER JOIN irs ON irs.nim = mhs.nim WHERE mhs.nama LIKE '%".$Cari."%'");
-                                        }else{
-                                            $data = mysqli_query($conn, "SELECT * FROM mhs INNER JOIN irs ON irs.nim = mhs.nim");
-                                        }
+                                        $data = mysqli_query($conn, "SELECT * FROM mhs INNER JOIN irs ON irs.nim = mhs.nim");
+
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($data)) {
                                             echo "<tr>";
                                             echo "<th>".$no."</th>";
                                             echo "<td>".$row['nama']."</td>";
                                             echo "<td>".$row['nim']."</td>";
+                                            echo "<td>".$row['smt']."</td>";
+                                            echo "<td>".$row['sks']."</td>";
                                             echo "<td>".$row['angkatan']."</td>";
                                             echo "<td>".$row['verif']."</td>";
                                             echo '<td><a class="btn btn-info" href="upload/' .$row['scan'] . '">Lihat</a></td>';
