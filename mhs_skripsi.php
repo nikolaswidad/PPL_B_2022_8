@@ -45,38 +45,41 @@ $nim = $_SESSION['nim'];
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                <div class="s">
-                        <div class="container">
-                            <div class="card mt-4">
-                                <div class="card-header">DATA Skripsi</div>
-                                <div class="card-body">
-                                    <br>
-                                    <a class="btn btn-primary mb-3" href="mhs_skripsi_add.php">+ Tambah Data Skripsi</a>
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>NIM</th>
-                                                <th>Status</th>
-                                                <th>Nilai</th>
-                                                <th>Lama Studi</th>
-                                                <th>Tanggal Sidang</th>
-                                                <th>Scan</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+
+                    <!-- Page Heading -->
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1> -->
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Data Skripsi</h6>
+                        </div>
+                        <div class="card-body">
+                        <a class="btn btn-primary mb-3" href="mhs_skripsi_add.php">+ Tambah Data Skripsi</a>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>NIM</th>
+                                            <th>Status</th>
+                                            <th>Nilai</th>
+                                            <th>Lama Studi</th>
+                                            <th>Tanggal Sidang</th>
+                                            <th>Scan</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         <?php
                                             $query = "SELECT * FROM skripsi WHERE nim = '$nim'";
                                             $result = $conn->query($query);
                                             $i = 1;
                                             while ($row = $result->fetch_assoc()) {
                                                 echo "<tr>";
-                                                echo "<td>".$i."</td>";
                                                 echo "<td>".$row['nim']."</td>";
                                                 echo "<td>".$row['id_status']."</td>";
                                                 echo "<td>".$row['nilai']."</td>";
-                                                echo "<td>".$row['lama_studi']."</td>";
+                                                echo "<td>".$row['lama_studi']." Semester</td>";
                                                 echo "<td>".$row['tanggal_sidang']."</td>";
                                                 echo '<td><a href="upload/' .$row['scan'] . '">' .$row['scan'].'</a></td>';
                                                 echo '<td>
@@ -87,42 +90,12 @@ $nim = $_SESSION['nim'];
                                             }
                                             ?>
                                             <!-- <a class="btn btn-warning btn-sm" href="mhs_irs_edit.php?smt='.$row["smt"].'">Edit</a> -->
-
-
-                                        
-                                    </table>
-                                    <br>
-                                    <?php
-
-                                    $result->free();
-                                    $conn->close();
-                                    ?>
-                                    <br><br>
-                                    </table>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-
-                        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-                        <script>
-                            function deleteData(id) {
-                                var conf = confirm("Are you sure, do you really want to delete Customer?");
-                                if (conf == true) {
-                                    $.ajax({
-                                        url: "delete_post.php",
-                                        type: "POST",
-                                        data: {
-                                            id: id
-                                        },
-                                        success: function(data) {
-                                            $("#delete" + id).hide('slow');
-                                        }
-                                    });
-                                }
-                            }
-                        </script>
                     </div>
+
                 </div>
                 <!-- /.container-fluid -->
 

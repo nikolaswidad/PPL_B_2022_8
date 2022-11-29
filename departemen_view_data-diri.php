@@ -2,7 +2,6 @@
 session_start(); //inisialisasi session
 require_once('config.php');
 $email = $_SESSION['username'];
-$id_user = $_SESSION['user_id'];
 $nim = $_GET['nim'];
 
 $select = "SELECT mhs.nama AS nama, mhs.status_mhs, mhs.nim, mhs.angkatan, mhs.alamat, mhs.hp, dosen.nama AS nama_dosen, provinsi.nama AS nama_provinsi, kabupaten.nama AS nama_kabupaten
