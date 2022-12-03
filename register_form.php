@@ -90,7 +90,7 @@ if(isset($_POST['submit'])){
                                     <input type="password" name="cpassword" required placeholder="Konfirmasi Kata Sandi" class="form-control form-control-user">
                                 </div>
                                 <div class="form-group" >
-                                   <select name="user_type" class="form-control btn dropdown-toggle">
+                                   <select name="user_type" class="form-control btn dropdown-toggle ">
                                        <option value="" selected disabled>Pilih Tipe User</option>
                                        <option value="mahasiswa">Mahasiswa</option>
                                        <option value="dosen">Dosen</option>
@@ -104,7 +104,7 @@ if(isset($_POST['submit'])){
                                 >
                                     Generate Account
                                 </a> -->
-                                <hr>
+                                <!-- <hr> -->
                             </form>
 
                             <div class="text-center">
