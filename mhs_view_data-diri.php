@@ -71,7 +71,7 @@ if ($result->num_rows > 0) {
 
             <!-- Main Content -->
             <div id="content">
-              <?php include('header.html'); ?>\
+              <?php include('header.html'); ?>
 
               <?php include('data-diri.php'); ?>
             </div>
