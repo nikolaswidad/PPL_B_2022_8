@@ -5,6 +5,7 @@ require_once('config.php');
 $email = $_SESSION['username'];
 $id_user = $_SESSION['user_id'];
 $nim = $_SESSION['nim'];
+$nama = $_SESSION['nama'];
 
 
 
@@ -37,6 +38,7 @@ $nim = $_SESSION['nim'];
             <!-- Main Content -->
             <div id="content">
                 <?php include('header.html'); ?>
+
                 <div class="container-fluid">
 
                 <!-- Page Heading -->

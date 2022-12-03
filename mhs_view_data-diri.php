@@ -5,13 +5,15 @@ $email = $_SESSION['username'];
 $id_user = $_SESSION['user_id'];
 $nim = $_SESSION['nim'];
 
-$select = "SELECT mhs.nama AS nama, mhs.status_mhs, mhs.nim, mhs.angkatan, mhs.alamat, mhs.hp, dosen.nama AS nama_dosen, provinsi.nama AS nama_provinsi, kabupaten.nama AS nama_kabupaten
+
+$select = "SELECT mhs.foto AS foto, mhs.nama AS nama, mhs.status_mhs, mhs.nim, mhs.angkatan, mhs.alamat, mhs.hp, dosen.nama AS nama_dosen, provinsi.nama AS nama_provinsi, kabupaten.nama AS nama_kabupaten
           FROM mhs INNER JOIN provinsi ON mhs.id_provinsi = provinsi.id INNER JOIN kabupaten ON mhs.id_kabupaten = kabupaten.id INNER JOIN dosen ON mhs.nip = dosen.nip
           WHERE nim = '$nim'";
 $result = $conn->query($select);
 
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
+    $foto = $row['foto'];
     $nama = $row['nama'];
     $status_mhs = $row['status_mhs'];
     $nim = $row['nim'];
@@ -22,8 +24,10 @@ if ($result->num_rows > 0) {
     $provinsi = $row['nama_provinsi'];
     $kabupaten = $row['nama_kabupaten'];
     $error = "";
+    $_SESSION['nama'] = $row['nama'];
   }
 } else {
+  $foto = "";
   $nama = "";
   $status_mhs = "";
   $nim = "";
@@ -54,7 +58,7 @@ if ($result->num_rows > 0) {
 
 </head>
 
-<body id="page-top" onload="getProvinsi()">
+<body id="page-top">
     
     <!-- Page Wrapper -->
     <div id="wrapper">

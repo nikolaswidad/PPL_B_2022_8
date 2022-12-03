@@ -15,12 +15,13 @@ if ($ress->num_rows > 0) {
     // $id_status = $row['id_status'];
     $angkatan = $row['angkatan'];
     $alamat = $row['alamat'];
-    // $provinsi = $row['provinsi'];
+    $provinsi = $row['id_provinsi'];
     // $kota = $row['kota'];
     $hp = $row['hp'];
     $foto = $row['foto'];
   }
 }
+
 
 
 
@@ -38,6 +39,11 @@ if (isset($_POST['submit'])) {
   $alamat = $conn->real_escape_string(trim($_POST['alamat']));
   $provinsi = $conn->real_escape_string(trim($_POST['provinsi']));
   $kabupaten = $conn->real_escape_string(trim($_POST['kabupaten']));
+
+  $foto = $_POST['foto'];
+  $lokasi_file = $_FILES['foto']['tmp_name'];
+  $foto = $_FILES['foto']['name'];
+  $dir = "upload/$foto";
 
   // // Check if nama is empty
   // if (empty($_POST['nama'])) {
@@ -136,8 +142,9 @@ if (isset($_POST['submit'])) {
 
     // Membuat data mahasiswa yang sudah tersambung ke user_id
     // $query = "INSERT INTO mhs (id_user, foto, nama, nim, angkatan, status_mhs, nip, hp, email, alamat, id_provinsi, id_kabupaten) VALUES ('$id_user' ,'$namefile', '$nama', '$nim', '$angkatan', '$status_mhs', '$nip', '$hp', '$email', '$alamat', $provinsi, $kabupaten)";
-    $query = "UPDATE mhs SET id_user = '$id_user', nama = '$nama', angkatan = '$angkatan',
+    $query = "UPDATE mhs SET foto = '$foto', id_user = '$id_user', nama = '$nama', angkatan = '$angkatan',
      status_mhs = '$status_mhs', nip = '$nip', hp = '$hp', email = '$email', alamat = '$alamat', id_provinsi = '$provinsi', id_kabupaten = '$kabupaten' WHERE nim = '$nim'  ";
+    move_uploaded_file($lokasi_file,$dir);
     
     $result = $conn->query($query);
 
@@ -215,11 +222,11 @@ if (isset($_POST['submit'])) {
                 <div class="card-header">Masukkan Data Diri</div>
                   <div class="card-body">
                     <!-- /* TODO definisikan method dan actions */ -->
-                    <form name="daftar" method="POST" action="" >
-                      <div class="row mb-3" action="upload.php" method="post" enctype="multipart/form-data">
+                    <form name="daftar" method="POST" action=""  enctype="multipart/form-data">
+                      <div class="row mb-3">
                         <label for="inputNumber" class="col-sm-2 col-form-label">Upload Foto</label>
                         <div class="col-sm-10">
-                          <input class="form-control" type="file" id="formFile">
+                          <input class="form-control" type="file" id="foto" name="foto">
                         </div>
                       </div>
                       

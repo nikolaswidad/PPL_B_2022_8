@@ -5,7 +5,7 @@ require_once('config.php');
 $email = $_SESSION['username'];
 $id_user = $_SESSION['user_id'];
 $nim = $_SESSION['nim'];
-
+$nama = $_SESSION['nama'];
 ?>
 
 <!DOCTYPE html>
