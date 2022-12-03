@@ -11,14 +11,13 @@ $ress = $conn->query($select);
 
 if ($ress->num_rows > 0) {
   while ($row = $ress->fetch_assoc()) {
+    $foto = $row['foto'];
     $nama = $row['nama'];
-    // $id_status = $row['id_status'];
+    $status_mhs = $row['status_mhs'];
+    $nim = $row['nim'];
     $angkatan = $row['angkatan'];
     $alamat = $row['alamat'];
-    $provinsi = $row['id_provinsi'];
-    // $kota = $row['kota'];
     $hp = $row['hp'];
-    $foto = $row['foto'];
   }
 }
 
@@ -226,7 +225,7 @@ if (isset($_POST['submit'])) {
                       <div class="row mb-3">
                         <label for="inputNumber" class="col-sm-2 col-form-label">Upload Foto</label>
                         <div class="col-sm-10">
-                          <input class="form-control" type="file" id="foto" name="foto">
+                          <input class="form-control" type="file" id="foto" name="foto" value="<?php if (isset($foto)) echo $foto; ?>">
                         </div>
                       </div>
                       
