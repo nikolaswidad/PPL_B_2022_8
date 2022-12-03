@@ -62,7 +62,7 @@ $nim = $_SESSION['nim'];
                                         <th>Semester</th>
                                         <th>Beban SKS</th>
                                         <th>Scan</th>
-                                        <th>Status</th>
+                                        <th>Verifikasi</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

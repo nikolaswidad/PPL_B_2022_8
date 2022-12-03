@@ -64,6 +64,7 @@ $nim = $_SESSION['nim'];
                                             <th>Status</th>
                                             <th>Nilai</th>
                                             <th>Scan</th>
+                                            <th>Verifikasi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -79,6 +80,7 @@ $nim = $_SESSION['nim'];
                                             echo "<td>".$row['nilai']."</td>";
                                             echo '<td><a href="upload/' .$row['scan'] . '">' .$row
                                             ['scan'].'</a></td>';
+                                            echo "<td>".$row['verif']."</td>";
                                             echo '<td>
                                             <a class="btn btn-danger btn-sm" href="mhs_pkl_delete.php?id=' . $row["id"] . '">Hapus</a>
                                             </td>';
@@ -131,30 +133,7 @@ $nim = $_SESSION['nim'];
             </div>
         </div>
     </div>
-<!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript--><!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript--><!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
-    <!-- Bootstrap core JavaScript-->
+
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

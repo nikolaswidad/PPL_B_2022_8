@@ -66,6 +66,7 @@ $nim = $_SESSION['nim'];
                                             <th>Lama Studi</th>
                                             <th>Tanggal Sidang</th>
                                             <th>Scan</th>
+                                            <th>Verifikasi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -82,6 +83,7 @@ $nim = $_SESSION['nim'];
                                                 echo "<td>".$row['lama_studi']." Semester</td>";
                                                 echo "<td>".$row['tanggal_sidang']."</td>";
                                                 echo '<td><a href="upload/' .$row['scan'] . '">' .$row['scan'].'</a></td>';
+                                                echo "<td>".$row['verif']."</td>";
                                                 echo '<td>
                                                 <a class="btn btn-danger btn-sm" href="mhs_skripsi_delete.php?id=' . $row["id"] . '">Hapus</a>
                                                 </td>';
