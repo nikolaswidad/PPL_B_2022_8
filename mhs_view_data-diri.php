@@ -1,4 +1,5 @@
 <?php
+// error_reporting(error_reporting() & ~E_NOTICE);
 session_start(); //inisialisasi session
 require_once('config.php');
 $email = $_SESSION['username'];
@@ -95,7 +96,6 @@ if ($result->num_rows > 0) {
 
                 <!-- Content Row -->
                 <div class="row">
-
                     <!-- Earnings (Monthly) Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-primary shadow h-100 py-2">
@@ -109,15 +109,22 @@ if ($result->num_rows > 0) {
                                             <?php
                                               $query = "SELECT * FROM irs WHERE nim = $nim AND verif = 'Sudah'";
                                               $result = $conn->query($query);
+                                              $sudah = $result->num_rows;
 
                                               $queryb = "SELECT * FROM irs WHERE nim = $nim ";
                                               $resultb = $conn->query($queryb);
-                                              $belum = $resultb->num_rows;
+                                              $total = $resultb->num_rows;
                                                   
-                                              $sudah = $result->num_rows;
-                                              echo '<a href="#" class="btn btn-success btn-circle btn-sm">
-                                              <i class="fas fa-check"></i> 
-                                              </a> '.$sudah.' / '.$belum.' Terverifikasi';
+                                              if($sudah < $total ){
+                                                echo '<a href="#" class="btn btn-warning btn-circle btn-sm">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                                </a> ';
+                                              } else {
+                                                echo '<a href="#" class="btn btn-success btn-circle btn-sm">
+                                                <i class="fas fa-check"></i> 
+                                                </a> ';
+                                              }
+                                              echo $sudah.' / '.$total.' Terverifikasi';
                                               $result->free();
                                               echo "<br>";
                                               ?>
@@ -131,11 +138,11 @@ if ($result->num_rows > 0) {
 
                     <!-- Earnings (Monthly) Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card border-left-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             KHS
                                         </div>
                                         <div class="row no-gutters align-items-center">
@@ -144,15 +151,22 @@ if ($result->num_rows > 0) {
                                                     <?php
                                                       $query = "SELECT * FROM khs WHERE nim = $nim AND verif = 'Sudah'";
                                                       $result = $conn->query($query);
+                                                      $sudah = $result->num_rows;
 
                                                       $queryb = "SELECT * FROM irs WHERE nim = $nim ";
                                                       $resultb = $conn->query($queryb);
                                                       $belum = $resultb->num_rows;
-                                                          
-                                                      $sudah = $result->num_rows;
-                                                      echo '<a href="#" class="btn btn-success btn-circle btn-sm">
-                                                      <i class="fas fa-check"></i> 
-                                                      </a> '.$sudah.' / '.$belum.' Terverifikasi';
+                                                      
+                                                      if($sudah < $total ){
+                                                        echo '<a href="#" class="btn btn-warning btn-circle btn-sm">
+                                                        <i class="fas fa-exclamation-triangle"></i>
+                                                        </a> ';
+                                                      } else {
+                                                        echo '<a href="#" class="btn btn-success btn-circle btn-sm">
+                                                        <i class="fas fa-check"></i> 
+                                                        </a> ';
+                                                      }
+                                                      echo $sudah.' / '.$belum.' Terverifikasi';
                                                       $result->free();
                                                       echo "<br>";
                                                       ?>
@@ -177,11 +191,11 @@ if ($result->num_rows > 0) {
 
                     <!-- Lulus Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card border-left-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             PKL</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                                           <?php
@@ -197,7 +211,7 @@ if ($result->num_rows > 0) {
                                               } else {
                                                 echo '<a href="#" class="btn btn-warning btn-circle btn-sm">
                                                 <i class="fas fa-exclamation-triangle"></i>
-                                                </a>';
+                                                </a> ';
                                                 echo "Belum Diverifikasi";
                                               }
                                               $result->free();
@@ -215,11 +229,11 @@ if ($result->num_rows > 0) {
 
                     <!-- Drop Out Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card border-left-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Skripsi
                                         </div>
                                         <div class="row no-gutters align-items-center">
@@ -238,7 +252,7 @@ if ($result->num_rows > 0) {
                                                     } else {
                                                       echo '<a href="#" class="btn btn-warning btn-circle btn-sm">
                                                       <i class="fas fa-exclamation-triangle"></i>
-                                                      </a>';
+                                                      </a> ';
                                                       echo "Belum Terverifikasi";
                                                     }
                                                     $result->free();
