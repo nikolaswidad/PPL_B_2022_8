@@ -66,7 +66,7 @@
                             <div class="row">
                                 <label for="email" class="col-sm-4 col-form-label">Email</label>
                                     <div class="col-sm-10">                        
-                                        <p class="form-control"><?php echo $email; ?></p>  
+                                        <p class="form-control"><?php echo $emailmhs; ?></p>  
                                     </div>
                             </div>
                             <div class="row">
