@@ -193,7 +193,7 @@ if ($result->num_rows > 0) {
                                                 echo '<a href="#" class="btn btn-success btn-circle btn-sm">
                                                       <i class="fas fa-check"></i> 
                                                       </a> ';
-                                                echo "Sudah Diverifikasi";
+                                                echo "Terverifikasi";
                                               } else {
                                                 echo '<a href="#" class="btn btn-warning btn-circle btn-sm">
                                                 <i class="fas fa-exclamation-triangle"></i>
