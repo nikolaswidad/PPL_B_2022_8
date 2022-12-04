@@ -166,6 +166,7 @@
                         <th scope="col">Status</th>
                         <th scope="col">Dosen Pembimbing</th>
                         <th scope="col">Scan</th>
+                        <th scope="col">Profil</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -188,6 +189,7 @@
                             echo "<td>".$row['id_status']."</td>";
                             echo "<td>".$row['dosen']."</td>";
                             echo '<td><a class="btn btn-info" href="upload/' .$row['scan'] . '">Lihat</a></td>';
+                            echo '<td><a class="btn btn-secondary" href="dosen_view_data-diri.php?nim='.$row['nim'].'">Lihat</a></td>';
                             echo "</tr>";
                             $i++;
                         }

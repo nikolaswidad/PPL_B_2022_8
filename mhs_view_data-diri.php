@@ -92,6 +92,171 @@ if ($result->num_rows > 0) {
                             <a href="mhs_data-diri.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Update Data</a>
                     <?php endif; ?>
                 </div>
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-s font-weight-bold text-primary text-uppercase mb-1">
+                                            IRS
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <?php
+                                              $query = "SELECT * FROM irs WHERE nim = $nim AND verif = 'Sudah'";
+                                              $result = $conn->query($query);
+
+                                              $queryb = "SELECT * FROM irs WHERE nim = $nim ";
+                                              $resultb = $conn->query($queryb);
+                                              $belum = $resultb->num_rows;
+                                                  
+                                              $sudah = $result->num_rows;
+                                              echo '<a href="#" class="btn btn-success btn-circle btn-sm">
+                                              <i class="fas fa-check"></i> 
+                                              </a> '.$sudah.' / '.$belum.' Terverifikasi';
+                                              $result->free();
+                                              echo "<br>";
+                                              ?>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                            KHS
+                                        </div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                    <?php
+                                                      $query = "SELECT * FROM khs WHERE nim = $nim AND verif = 'Sudah'";
+                                                      $result = $conn->query($query);
+
+                                                      $queryb = "SELECT * FROM irs WHERE nim = $nim ";
+                                                      $resultb = $conn->query($queryb);
+                                                      $belum = $resultb->num_rows;
+                                                          
+                                                      $sudah = $result->num_rows;
+                                                      echo '<a href="#" class="btn btn-success btn-circle btn-sm">
+                                                      <i class="fas fa-check"></i> 
+                                                      </a> '.$sudah.' / '.$belum.' Terverifikasi';
+                                                      $result->free();
+                                                      echo "<br>";
+                                                      ?>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col">
+                                                <div class="progress progress-sm mr-2">
+                                                    <div class="progress-bar bg-info" role="progressbar"
+                                                        style="width: <php echo $persentase_aktif;?>%" aria-valuenow="10" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-auto">
+                                        <i class="fas fa-toggle-on fa-2x text-gray-300"></i>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lulus Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            PKL</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                          <?php
+                                              $query = "SELECT * FROM pkl WHERE nim = $nim";
+                                              $result = $conn->query($query);
+                                                  
+                                              $row = $result->fetch_assoc();
+                                              if($row['verif'] == 'Sudah'){
+                                                echo '<a href="#" class="btn btn-success btn-circle btn-sm">
+                                                      <i class="fas fa-check"></i> 
+                                                      </a> ';
+                                                echo "Sudah Diverifikasi";
+                                              } else {
+                                                echo '<a href="#" class="btn btn-warning btn-circle btn-sm">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                                </a>';
+                                                echo "Belum Diverifikasi";
+                                              }
+                                              $result->free();
+                                              echo "\n";
+                                          ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drop Out Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-danger shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                            Skripsi
+                                        </div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                  <?php
+                                                    $query = "SELECT * FROM skripsi WHERE nim = $nim";
+                                                    $result = $conn->query($query);
+                                                        
+                                                    $row = $result->fetch_assoc();
+                                                    if($row['verif'] == 'Sudah'){
+                                                      echo '<a href="#" class="btn btn-success btn-circle btn-sm">
+                                                      <i class="fas fa-check"></i> 
+                                                      </a> ';
+                                                      echo "Terverifikasi";
+                                                    } else {
+                                                      echo '<a href="#" class="btn btn-warning btn-circle btn-sm">
+                                                      <i class="fas fa-exclamation-triangle"></i>
+                                                      </a>';
+                                                      echo "Belum Terverifikasi";
+                                                    }
+                                                    $result->free();
+                                                    echo "\n";
+                                                  ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
               </div>
 
               <?php include('data-diri.php'); ?>

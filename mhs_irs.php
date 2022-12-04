@@ -72,6 +72,7 @@ $nama = $_SESSION['nama'];
                                     $query = "SELECT * FROM irs WHERE nim = '$nim' ORDER BY smt ";
                                     $result = $conn->query($query);
                                     $i = 1;
+
                                     while ($row = $result->fetch_assoc()) {
                                         echo "<tr>";
                                         echo "<td>".$i."</td>";
@@ -80,9 +81,13 @@ $nama = $_SESSION['nama'];
                                         echo "<td>".$row['sks']."</td>";
                                         echo '<td><a href="upload/' .$row['scan'] . '">' .$row
                                         ['scan'].'</a></td>';
-                                        echo "<td>".$row['verif']."</td>";
+                                        echo "<td>
+                                        ".$row['verif']."
+                                        </td>";
                                         echo '<td>
-                                        <a class="btn btn-danger btn-sm" href="mhs_irs_delete.php?id=' . $row["smt"] . '">Hapus</a>
+                                        <a href="mhs_irs_delete.php?id=' . $row["smt"] . '" class="btn btn-danger btn-circle">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
                                         </td>';
                                         echo "</tr>";
                                         $i++;

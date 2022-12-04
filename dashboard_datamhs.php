@@ -275,7 +275,7 @@
                         <th scope="col">NIM</th>
                         <th scope="col">Angkatan</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Detail Info</th>
+                        <th scope="col">Profil</th>
 
                         </tr>
                     </thead>

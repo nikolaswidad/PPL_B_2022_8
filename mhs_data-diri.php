@@ -30,6 +30,7 @@ if ($ress->num_rows > 0) {
 // var_dump($foto);
 // var_dump($nip);
  var_dump($nim);
+ var_dump($nip);
 
 // Check if already submit the form
 if (isset($_POST['submit'])) {
@@ -204,7 +205,7 @@ if (isset($_POST['submit'])) {
                             $query = "SELECT * FROM dosen";
                             $result = mysqli_query($conn, $query);
                             while ($row = $result->fetch_object()) {
-                              echo "<option value='" . $row->nip . "'  >" . $row->nama . "</option>";
+                              echo "<option value='" . $row->nip . "' >" . $row->nama . "</option>";
                             }
                             ?>
                           </select>
