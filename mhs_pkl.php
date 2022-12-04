@@ -55,7 +55,13 @@ $nama = $_SESSION['nama'];
                             <h6 class="m-0 font-weight-bold text-primary">Data PKL</h6>
                         </div>
                         <div class="card-body">
-                            <a class="btn btn-primary mb-3" href="mhs_pkl_add.php">+ Tambah Data PKL</a>
+                            <?php
+                                $query = "SELECT * FROM pkl WHERE nim = '$nim'";
+                                $result = $conn->query($query);
+                                if($result->num_rows == 0){
+                                    echo '<a class="btn btn-primary mb-3" href="mhs_pkl_add.php">+ Tambah Data PKL</a>';
+                                }
+                            ?>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>

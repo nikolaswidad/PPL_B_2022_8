@@ -56,7 +56,14 @@ $nama = $_SESSION['nama'];
                             <h6 class="m-0 font-weight-bold text-primary">Data Skripsi</h6>
                         </div>
                         <div class="card-body">
-                        <a class="btn btn-primary mb-3" href="mhs_skripsi_add.php">+ Tambah Data Skripsi</a>
+                        <?php
+                            $query = "SELECT * FROM skripsi WHERE nim = '$nim'";
+                            $result = $conn->query($query);
+                            if($result->num_rows == 0){
+                                echo '<a class="btn btn-primary mb-3" href="mhs_skripsi_add.php">+ Tambah Data Skripsi</a>';
+                            }
+                        ?>
+                        
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
