@@ -3,10 +3,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <div class="d-sm-flex align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Data Diri</h6>
-                <a href="mhs_data-diri.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Update Data</a>
-            </div>
+            <h6 class="m-0 font-weight-bold text-primary">Data Diri</h6>
         </div>
         <div class="card-body">
             <?php if ($error) : ?>

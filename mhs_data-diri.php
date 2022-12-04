@@ -18,11 +18,18 @@ if ($ress->num_rows > 0) {
     $angkatan = $row['angkatan'];
     $alamat = $row['alamat'];
     $hp = $row['hp'];
+    $nip = $row['nip'];
+    $id_status = $row['status_mhs'];
+    $provinsi = $row['id_provinsi'];
+    $kabupaten = $row['id_kabupaten'];
   }
 }
-
-
-
+// var_dump($id_status);
+// var_dump($provinsi);
+// var_dump($kabupaten);
+// var_dump($foto);
+// var_dump($nip);
+ var_dump($nim);
 
 // Check if already submit the form
 if (isset($_POST['submit'])) {
@@ -44,104 +51,13 @@ if (isset($_POST['submit'])) {
   $foto = $_FILES['foto']['name'];
   $dir = "upload/$foto";
 
-  // // Check if nama is empty
-  // if (empty($_POST['nama'])) {
-  //   $error_nama = "Nama tidak boleh kosong";
-  //   $submit = false;
-  // } else {
-  //   $nama = $conn->real_escape_string(trim($_POST['nama']));
-  // }
-
-  // // Check if nim is empty
-  // if (empty($_POST['nim'])) {
-  //   $error_nim = "NIM tidak boleh kosong";
-  //   $submit = false;
-  // } else {
-  //   $nim = $conn->real_escape_string(trim($_POST['nim']));
-  // }
-
-  // // Check if angkatan is empty
-  // if (empty($_POST['angkatan'])) {
-  //   $error_angkatan = "Tahun Angkatan tidak boleh kosong";
-  //   $submit = false;
-  // } else {
-  //   $angkatan = $conn->real_escape_string(trim($_POST['angkatan']));
-  // }
-  // // Check if status_mhs is empty
-  // if (empty($_POST['status_mhs'])) {
-  //   $error_status_mhs = "Wajib isi, tidak boleh kosong";
-  //   $submit = false;
-  // } else {
-  //   $status_mhs = $conn->real_escape_string(trim($_POST['status_mhs']));
-  // }
-
-  // // Check if nip is empty
-  // if (empty($_POST['nip'])) {
-  //   $error_nip = "Dosen Wali tidak boleh kosong";
-  //   $submit = false;
-  // } else {
-  //   $nip = $conn->real_escape_string(trim($_POST['nip']));
-  // }
-
-  //   // Check if hp is empty
-  //   if (empty($_POST['hp'])) {
-  //     $error_hp = "Nomor HP tidak boleh kosong";
-  //     $submit = false;
-  //   } else {
-  //     $hp = $conn->real_escape_string(trim($_POST['hp']));
-  //   }
-
-  // // Check if email is empty
-  // if (empty($_POST['email'])) {
-  //   $error_email = "Email tidak boleh kosong";
-  //   $submit = false;
-  // } else {
-  //   // Check email is valid
-  //   if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-  //     $error_email = "Email tidak valid";
-  //     $submit = false;
-  //   } else {
-  //     $email = $conn->real_escape_string(trim($_POST['email']));
-  //     // Check if email is already registered
-  //     $query = "SELECT * FROM mhs WHERE email = '$email'";
-  //     $result = $conn->query($query);
-  //     if ($result->num_rows > 0) {
-  //       $error_email = "Email sudah terdaftar";
-  //       $submit = false;
-  //     }
-  //   }
-  // }
-
-  // // Check if alamat is empty
-  // if (empty($_POST['alamat'])) {
-  //   $error_alamat = "Alamat tidak boleh kosong";
-  //   $submit = false;
-  // } else {
-  //   $alamat = $conn->real_escape_string(trim($_POST['alamat']));
-  // }
-
-  // // Check if provinsi is empty
-  // if (empty($_POST['provinsi'])) {
-  //   $error_provinsi = "Provinsi tidak boleh kosong";
-  //   $submit = false;
-  // } else {
-  //   $provinsi = $conn->real_escape_string(trim($_POST['provinsi']));
-  // }
-
-  // // Check if kabupaten is empty
-  // if (empty($_POST['kabupaten'])) {
-  //   $error_kabupaten = "Kabupaten tidak boleh kosong";
-  //   $submit = false;
-  // } else {
-  //   $kabupaten = $conn->real_escape_string(trim($_POST['kabupaten']));
-  // }
 
   // If submit is true, insert the data
   if ($submit) {
 
     // Membuat data mahasiswa yang sudah tersambung ke user_id
     // $query = "INSERT INTO mhs (id_user, foto, nama, nim, angkatan, status_mhs, nip, hp, email, alamat, id_provinsi, id_kabupaten) VALUES ('$id_user' ,'$namefile', '$nama', '$nim', '$angkatan', '$status_mhs', '$nip', '$hp', '$email', '$alamat', $provinsi, $kabupaten)";
-    $query = "UPDATE mhs SET foto = '$foto', id_user = '$id_user', nama = '$nama', angkatan = '$angkatan',
+    $query = "UPDATE mhs SET foto = '$foto', id_user = '$id_user', nama = '$nama', angkatan = '$angkatan', 
      status_mhs = '$status_mhs', nip = '$nip', hp = '$hp', email = '$email', alamat = '$alamat', id_provinsi = '$provinsi', id_kabupaten = '$kabupaten' WHERE nim = '$nim'  ";
     move_uploaded_file($lokasi_file,$dir);
     
@@ -162,6 +78,7 @@ if (isset($_POST['submit'])) {
 
     $conn->close();
   }
+
 }
 
 
@@ -262,14 +179,14 @@ if (isset($_POST['submit'])) {
                         <label for="status_mhs" class="col-sm-2 col-form-label">Status Mahasiswa</label>
                         <div class="col-sm-10">  
                           <select name="status_mhs" id="status_mhs" class="form-control">
-                            <option value="" selected disabled>Pilih Status</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Cuti">Cuti</option>
-                            <option value="Mangkir">Mangkir</option>
-                            <option value="DO">DO</option>
-                            <option value="Undur Diri">Undur Diri</option>
-                            <option value="Lulus">Lulus</option>
-                            <option value="Meninggal">Meninggal</option>
+                            <option value="none" <?php if (!isset($id_status)) echo 'selected="true"'; ?> selected disabled>Pilih Status</option>
+                            <option value="Aktif" <?php if (isset($id_status) && $id_status == 'Aktif') echo 'selected="true"'; ?>>Aktif</option>
+                            <option value="Cuti"<?php if (isset($id_status) && $id_status == 'Cuti') echo 'selected="true"'; ?>>Cuti</option>
+                            <option value="Mangkir"<?php if (isset($id_status) && $id_status == 'Mangkir') echo 'selected="true"'; ?>>Mangkir</option>
+                            <option value="DO"<?php if (isset($id_status) && $id_status == 'DO') echo 'selected="true"'; ?>>DO</option>
+                            <option value="Undur Diri"<?php if (isset($id_status) && $id_status == 'Undur Diri') echo 'selected="true"'; ?>>Undur Diri</option>
+                            <option value="Lulus"<?php if (isset($id_status) && $id_status == 'Lulus') echo 'selected="true"'; ?>>Lulus</option>
+                            <option value="Meninggal"<?php if (isset($id_status) && $id_status == 'Meninggal') echo 'selected="true"'; ?>>Meninggal</option>
                           </select>
                           <div id="error_status_mhs" style="color: red;">
                             <?php if (isset($error_status_mhs))  echo $error_status_mhs ?>
@@ -282,12 +199,12 @@ if (isset($_POST['submit'])) {
                         <label for="nip" class="col-sm-2 col-form-label">Dosen Wali</label>
                         <div class="col-sm-10">  
                           <select name="nip" id="nip" class="form-control">
-                            <option value="">Pilih Dosen Wali</option>
+                            <option value="" <?php if (!isset($nip)) echo 'selected="true"'; ?> >Pilih Dosen Wali</option>
                             <?php 
                             $query = "SELECT * FROM dosen";
                             $result = mysqli_query($conn, $query);
                             while ($row = $result->fetch_object()) {
-                              echo "<option value='" . $row->nip . "'>" . $row->nama . "</option>";
+                              echo "<option value='" . $row->nip . "'  >" . $row->nama . "</option>";
                             }
                             ?>
                           </select>

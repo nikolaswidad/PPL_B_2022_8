@@ -73,6 +73,27 @@ if ($result->num_rows > 0) {
             <div id="content">
               <?php include('header.html'); ?>
 
+              <div class="container-fluid">
+
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                  <h2>
+                    Hai, 
+                    <?php 
+                    if(empty($nama)){
+                      echo $_SESSION['username'];
+                    } else {
+                      echo $nama;
+                    } 
+                    ?>
+                  </h2>
+                  <?php if ($error) : ?>
+                        <a href="mhs_data-diri.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Isi Data</a>
+                    <?php else: ?>
+                            <a href="mhs_data-diri.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Update Data</a>
+                    <?php endif; ?>
+                </div>
+              </div>
+
               <?php include('data-diri.php'); ?>
             </div>
             <!-- End of Main Content -->
