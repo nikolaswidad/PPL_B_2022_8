@@ -4,13 +4,14 @@ require_once('config.php');
 $email = $_SESSION['username'];
 $nim = $_GET['nim'];
 
-$select = "SELECT mhs.nama AS nama, mhs.status_mhs, mhs.nim, mhs.angkatan, mhs.alamat, mhs.hp, dosen.nama AS nama_dosen, provinsi.nama AS nama_provinsi, kabupaten.nama AS nama_kabupaten
+$select = "SELECT mhs.foto AS foto,mhs.nama AS nama, mhs.status_mhs, mhs.nim, mhs.angkatan, mhs.alamat, mhs.hp, dosen.nama AS nama_dosen, provinsi.nama AS nama_provinsi, kabupaten.nama AS nama_kabupaten
           FROM mhs INNER JOIN provinsi ON mhs.id_provinsi = provinsi.id INNER JOIN kabupaten ON mhs.id_kabupaten = kabupaten.id INNER JOIN dosen ON mhs.nip = dosen.nip
           WHERE nim = '$nim'";
 $result = $conn->query($select);
 
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
+    $foto = $row['foto'];
     $nama = $row['nama'];
     $status_mhs = $row['status_mhs'];
     $nim = $row['nim'];
@@ -23,6 +24,7 @@ if ($result->num_rows > 0) {
     $error = "";
   }
 } else {
+  $foto = "";
   $nama = "";
   $status_mhs = "";
   $nim = "";
@@ -68,104 +70,7 @@ if ($result->num_rows > 0) {
             <div id="content">
             <?php include('header.html'); ?>
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-              <!-- General Form Elements -->
-              <!-- General Form Elements -->
-              <div class="card">
-                <!-- If there is success variable, show message -->
-                <?php if (isset($success)) : ?>
-                  <?php if ($success) : ?>
-                    <div class="alert alert-success" role="alert">
-                      Berhasil mendaftar
-                    </div>
-                  <?php else : ?>
-                    <div class="alert alert-danger" role="alert">
-                      <?php echo $error_message ?>
-                    </div>
-                  <?php endif; ?>
-                <?php endif; ?>
-
-                <div class="card-header">Data Diri</div>
-                <div class="card-header"><?php echo $error;?></div>
-                <div class="card-body">
-                  <!-- /* TODO definisikan method dan actions */ -->
-                  <form name="daftar" method="POST" action="" >
-                    
-                    <div class="row mb-3">
-                      <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
-                      <div class="col-sm-10">
-                        <p class="form-control"><?php echo $nama; ?></p>                        
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="nim" class="col-sm-2 col-form-label">NIM</label>
-                      <div class="col-sm-10">                        
-                        <p class="form-control"><?php echo $nim; ?></p>      
-                      </div>            
-                    </div>
-                    <div class="row mb-3">
-                      <label for="angkatan" class="col-sm-2 col-form-label">Angkatan</label>
-                      <div class="col-sm-10">
-                        <p class="form-control"><?php echo $angkatan; ?></p>       
-                      </div>
-                    </div>
-                    
-                    <!-- get status -->
-                    <div class="row mb-3">
-                      <label for="status_mhs" class="col-sm-2 col-form-label">Status Mahasiswa</label>
-                      <div class="col-sm-10">  
-                        <p class="form-control"><?php echo $status_mhs; ?></p> 
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="nip" class="col-sm-2 col-form-label">Dosen Wali</label>
-                      <div class="col-sm-10">  
-                        <p class="form-control"><?php echo $dosen; ?></p> 
-                      </div>
-                    </div>
-
-                      
-                    <div class="row mb-3">
-                      <label for="hp" class="col-sm-2 col-form-label">Nomor HP</label>
-                      <div class="col-sm-10">    
-                        <p class="form-control"><?php echo $hp; ?></p>  
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="email" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">                        
-                          <p class="form-control"><?php echo $email; ?></p>  
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-                      <div class="col-sm-10">    
-                        <p class="form-control"><?php echo $alamat; ?></p>  
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="alamat" class="col-sm-2 col-form-label">Provinsi</label>
-                      <div class="col-sm-10">    
-                        <p class="form-control"><?php echo $provinsi; ?></p>  
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="alamat" class="col-sm-2 col-form-label">Kota/Kabupaten</label>
-                      <div class="col-sm-10">    
-                        <p class="form-control"><?php echo $kabupaten; ?></p>  
-                      </div>
-                    </div>
-                    <br>
-                    <a href="departemen_datamhs.php" class="btn btn-primary container-fluid">Kembali</a>
-                  </form>
-                </div>
-              </div>
-                </div>
-                <!-- /.container-fluid -->
-
+            <?php include('data-diri.php'); ?>
             </div>
             <!-- End of Main Content -->
 
